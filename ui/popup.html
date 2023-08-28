@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <title>GitHub Code Analyzer</title>
-    <style>
-        body {
-            background-color: deepblue;
-            color: naturalwhite;
-        }
-    </style>
-</head>
-
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- <link rel="stylesheet" href="./popup.css" /> -->
+        <title>GitHub Code Analyzer</title>
+        <style>
+            main {
+                width: 300px;
+                height: 500px;
+                display: flex;
+                justify-content: space-between;
+                flex-direction: column;
+                flex-wrap: nowrap
+            }
+        </style>
+    </head>
 <body>
-    <button id="start">Start</button>
+    <button id="startButton">Start</button>
     <div id="result"></div>
-
     <script src="popup.js"></script>
 </body>
-
 </html>

@@ -3,15 +3,13 @@
   "name": "AI Code Analyzer",
   "version": "0.1",
   "description": "Get the best code review possible with a finely-tuned GPT",
+  "permissions": [
+    "activeTab"
+  ],
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "scripts/background.js"
   },
   "action": {
-    "default_popup": "popup.html"
-  },
-  "permissions": [
-    "activeTab",
-    "http://*/*",
-    "https://*/*"
-  ]
+    "default_popup": "scripts/popup.html"
+  }
 }
