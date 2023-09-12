@@ -3,9 +3,18 @@
   "name": "AI Code Analyzer",
   "version": "0.1",
   "description": "Get the best code review possible with a finely-tuned GPT",
-  "permissions": [
-    "activeTab"
+  "permissions": ["activeTab"],
+  "host_permissions": [
+    "https://ai-reviewer-server.onrender.com/*",
+    "https://*/"
   ],
+  "externally_connectable": {
+    "matches": ["https://ai-reviewer-server.onrender.com/*"]
+  },
+  "content_scripts": [{
+    "matches": ["*://github.com/*"],
+    "js": ["content.js"]
+  }],
   "action": {
     "default_popup": "popup.html"
   }

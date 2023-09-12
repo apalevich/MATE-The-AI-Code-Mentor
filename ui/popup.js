@@ -1,12 +1,24 @@
-chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-  const tab = tabs[0];
-  const url = tab.url;
-  
-  const messageElement = document.getElementById("message");
-  
-  if (url.includes("github.com")) {
-    messageElement.textContent = "I can check some code here";
-  } else {
-    messageElement.textContent = "Visit Github please";
+document.addEventListener("DOMContentLoaded", checkHealth);
+
+async function checkHealth () {
+  const responseDiv = document.getElementById("message");
+  responseDiv.textContent= 'start';
+
+  try {
+    const apiUrl = "https://ai-reviewer-server.onrender.com/health";
+
+    responseDiv.textContent = 'loading';
+
+    const response = await fetch(apiUrl);
+
+    if (!response.ok) {
+      throw new Error(`Request failed with status: ${response.status}`);
+    }
+
+    const responseData = await response.json();
+    responseDiv.textContent = JSON.stringify(responseData.result);
+  } catch (error) {
+    console.error("Error:", error);
+    responseDiv.textContent = "Error: " + error.message;
   }
-});
+};
