@@ -7,6 +7,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get('/health', async (req, res) => {
+  res.json({result: 'It works!'})
+});
+
 app.post('/analyze', async (req, res) => {
   const codeContent = req.body.code;
 
