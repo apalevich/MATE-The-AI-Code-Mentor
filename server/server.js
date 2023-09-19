@@ -8,11 +8,19 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/health', async (req, res) => {
-  res.json({result: 'It works!'})
+  res.json({text: 'It works!'})
 });
 
+app.post('/health', async (req, res) => {
+  const { text, name } = req.body;
+  if (text && name) {
+    res.json({text: 'your code have bee successfully received'})
+  }
+  res.json({text: 'there is a problem in your request' })
+})
+
 app.post('/analyze', async (req, res) => {
-  const codeContent = req.body.code;
+  const { text, name } = req.body;
 
   try {
     const apiResponse = await axios.post('https://api.openai.com/v1/engines/davinci-codex/completions', {

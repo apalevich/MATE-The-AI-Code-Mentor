@@ -12,13 +12,29 @@ function parseTextFromDiv() {
 
 const parsedText = parseTextFromDiv();
 
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.action === 'getReview') {
-        console.log(request);
-        console.log(sender.tab
-            ? `from a content script: ${sender.tab.url}`
-            : `from the extension`);
-        sendResponse({ text: `Hello from Content` });
+chrome.runtime.onMessage.addListener(async (req, sender, sendResponse) => {
+    console.log(sender)
+    if (req.action === 'getReview') {
+        try {
+            const apiUrl = "https://ai-reviewer-server.onrender.com/health";
+        
+            const response = await fetch(apiUrl,
+                {method: 'POST', body: {text: parsedText}
+            });
+            console.log(response);
+        
+            if (!response.ok) {
+              throw new Error(`Request failed with status: ${response.status}`);
+            }
+        
+            const responseData = await response.json();
+            
+            sendResponse(responseData);
+            // sendResponse(JSON.stringify(responseData));
+          } catch (error) {
+            console.error("Error:", error);
+            sendResponse({ text: "Error: " + error.message });
+          }
     }
-    sendResponse({ text: `Error: wrong action "${request.action}"` });
+    sendResponse({ text: `Error: wrong action "${req.action}"` });
 });

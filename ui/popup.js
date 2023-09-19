@@ -17,7 +17,7 @@ async function checkHealth () {
     }
 
     const responseData = await response.json();
-    responseDiv.textContent = JSON.stringify(responseData.result);
+    responseDiv.textContent = JSON.stringify(responseData.text);
   } catch (error) {
     console.error("Error:", error);
     responseDiv.textContent = "Error: " + error.message;
@@ -26,6 +26,8 @@ async function checkHealth () {
 
 async function triggerAction () {
   const messageElement = document.getElementById("message");
+  messageElement.textContent = 'loading';
+
   const tab = await chrome.tabs.query({ active: true, currentWindow: true });
   const { id, url } = tab[0];  
   console.log('🌎: ', url);
@@ -40,7 +42,7 @@ async function triggerAction () {
       if (response && response.text) {
         messageElement.textContent = response.text;
       } else {
-        messageElement.textContent = "Element not found or empty";
+        messageElement.textContent = "Response not found or empty";
       };
     } else {
       messageElement.textContent = "Visit Github please";
