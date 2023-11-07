@@ -1,28 +1,4 @@
-document.addEventListener("DOMContentLoaded", triggerAction());
-
-async function checkHealth () {
-  const responseDiv = document.getElementById("message");
-  responseDiv.textContent= 'start';
-
-  try {
-    const apiUrl = "https://ai-reviewer-server.onrender.com/health";
-
-    responseDiv.textContent = 'loading';
-
-    const response = await fetch(apiUrl);
-	  console.log(response);
-
-    if (!response.ok) {
-      throw new Error(`Request failed with status: ${response.status}`);
-    }
-
-    const responseData = await response.json();
-    responseDiv.textContent = JSON.stringify(responseData.text);
-  } catch (error) {
-    console.error("Error:", error);
-    responseDiv.textContent = "Error: " + error.message;
-  }
-};
+document.addEventListener("DOMContentLoaded", triggerAction);
 
 async function triggerAction () {
   const messageElement = document.getElementById("message");
@@ -34,10 +10,9 @@ async function triggerAction () {
 
   try {
     if (url.includes("github.com")) {
-      
+      console.log("Sending message to content script");
       const response = await chrome.tabs.sendMessage(id, {action: 'getReview'});
-      
-      console.log('response:', response);
+      console.log('Response from content script:', response);
 
       if (response && response.text) {
         messageElement.textContent = response.text;
