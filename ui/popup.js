@@ -1,29 +1,34 @@
 document.addEventListener("DOMContentLoaded", triggerAction);
 
-async function triggerAction () {
+async function triggerAction() {
   const messageElement = document.getElementById("message");
-  messageElement.textContent = 'loading';
+  messageElement.textContent = "loading";
 
   const tab = await chrome.tabs.query({ active: true, currentWindow: true });
-  const { id, url } = tab[0];  
-  console.log('🌎: ', url);
+  const { id, url } = tab[0];
+
+  const urlEncoded = new URL(url);
+  if (urlEncoded.host !== "github.com") {
+    messageElement.textContent = "Visit Github please";
+    return;
+  }
 
   try {
-    if (url.includes("github.com")) {
-      console.log("Sending message to content script");
-      const response = await chrome.tabs.sendMessage(id, {action: 'getReview'});
-      console.log('Response from content script:', response);
+    console.log("Sending message to content script");
+    const response = await chrome.tabs.sendMessage(id, {
+      action: "getReview",
+    });
+    console.log("Response from content script:", response);
 
-      if (response && response.text) {
-        messageElement.textContent = response.text;
-      } else {
-        messageElement.textContent = "Response not found or empty";
-      };
+    // alert(response);
+    if (response && response.ok) {
+      messageElement.textContent = response.responseData.text;
     } else {
-      messageElement.textContent = "Visit Github please";
+      messageElement.textContent = "Response not found or empty";
     }
   } catch (error) {
-    console.error("Error:", error);
-    messageElement.textContent = "An error occurred while processing the action.";
+    const errorMessage = error;
+    console.error("Error from popup.js:", errorMessage);
+    messageElement.textContent = `Error from popup.js: ${errorMessage}"`;
   }
-};
+}

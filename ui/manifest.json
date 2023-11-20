@@ -8,12 +8,13 @@
     "matches": ["https://ai-reviewer-server.onrender.com/*"]
   },
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_title": "Get Code Review"
   },
   "content_scripts": [
-		{
-			"js": ["content.js"],
-			"matches": ["https://*.github.com/*"]
+    {
+      "js": ["content.js"],
+      "matches": ["https://*.github.com/*"]
     }
   ]
 }
