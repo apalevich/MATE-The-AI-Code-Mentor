@@ -22,7 +22,8 @@ async function triggerAction() {
 
     // alert(response);
     if (response && response.ok) {
-      messageElement.textContent = response.responseData.text;
+      messageElement.textContent =
+        response.responseData.choices[0].message.content;
     } else {
       messageElement.textContent = "Response not found or empty";
     }

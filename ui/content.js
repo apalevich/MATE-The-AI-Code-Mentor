@@ -2,15 +2,17 @@ console.log("Content script is running");
 
 const parsedText = parseTextFromDiv();
 
+const domain = "http://localhost:8000/";
+// const domain = "https://apalevich.com/backend/";
+
 chrome.runtime.onMessage.addListener((req, _sender, sendResponse) => {
   if (req.action === "getReview") {
-    const apiUrl = "https://apalevich.com/backend/mate/analyze";
+    const apiUrl = `${domain}mate/analyze`;
 
     fetch(apiUrl, {
       method: "POST",
       body: JSON.stringify({
-        text: parsedText,
-        name: "dev",
+        content: parsedText,
       }),
       headers: {
         "Content-Type": "application/json",
