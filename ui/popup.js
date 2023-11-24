@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", triggerAction);
 
 async function triggerAction() {
-  const messageElement = document.getElementById("message");
+  const messageElement = document.querySelector(".page");
   messageElement.textContent = "loading";
 
   const tab = await chrome.tabs.query({ active: true, currentWindow: true });
