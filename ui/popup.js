@@ -1,9 +1,27 @@
 document.addEventListener("DOMContentLoaded", triggerAction);
 
-async function triggerAction() {
-  const messageElement = document.querySelector(".page");
-  messageElement.textContent = "loading";
+// const messageElement = document.querySelector(".page");
+const loadingAnimationContainer = document.getElementById("loading-animation");
+const resultContainer = document.getElementById("result");
+const resultFeedback = document.getElementById("feedback");
+const resultPositive = document.getElementById("positive");
+const resultNegative = document.getElementById("negative");
+const resultSuggestion = document.getElementById("suggestion");
 
+const toggleContainers = () => {
+  loadingAnimationContainer.classList.toggle("hidden");
+  resultContainer.classList.toggle("hidden");
+};
+
+const generateList = (arr) => {
+  if (!arr.length) return "Нет замечаний";
+
+  const items = arr.reduce((acc, cur) => acc + `<li>${cur}</li>`, "");
+  return `<ol>${items}</ol>`;
+};
+
+async function triggerAction() {
+  // messageElement.textContent = "loading";
   const tab = await chrome.tabs.query({ active: true, currentWindow: true });
   const { id, url } = tab[0];
 
@@ -20,16 +38,24 @@ async function triggerAction() {
     });
     console.log("Response from content script:", response);
 
-    // alert(response);
     if (response && response.ok) {
-      messageElement.textContent =
-        response.responseData.choices[0].message.content;
+      const { feedback, positive, negative, suggestion } = JSON.parse(
+        response.responseData.choices[0].message.content,
+      );
+
+      resultFeedback.textContent = feedback;
+      resultPositive.innerHTML = generateList(positive);
+      resultNegative.innerHTML = generateList(negative);
+      resultSuggestion.textContent = suggestion;
+      console.log(response);
     } else {
-      messageElement.textContent = "Response not found or empty";
+      resultContainer = "Response not found or empty";
+      console.log(response);
     }
   } catch (error) {
     const errorMessage = error;
     console.error("Error from popup.js:", errorMessage);
     messageElement.textContent = `Error from popup.js: ${errorMessage}"`;
   }
+  toggleContainers();
 }
