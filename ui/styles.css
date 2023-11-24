@@ -2,10 +2,6 @@ html,
 body {
     width: 300px;
     height: 500px;
-    /* display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    flex-wrap: nowrap; */
     margin: 0;
     font-family: "Courier New", Courier, monospace;
     background-color: lightgray;
@@ -47,7 +43,7 @@ body {
     margin-bottom: 10px;
 }
 
-/* ANIMATION */
+/* LOADING ANIMATION */
 .lds-ring {
     display: inline-block;
     position: relative;
