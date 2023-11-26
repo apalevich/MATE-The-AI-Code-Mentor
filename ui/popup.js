@@ -57,3 +57,8 @@ async function triggerAction() {
   }
   toggleContainers();
 }
+
+document.querySelector("#links form").onsubmit = (e) => {
+  document.getElementById("log").classList.toggle("hidden");
+  document.querySelector("#links form").classList.toggle("hidden");
+};

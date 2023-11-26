@@ -2,8 +2,8 @@ console.log("Content script is running");
 
 const parsedText = parseTextFromDiv();
 
-const domain = "http://localhost:8000/";
-// const domain = "https://apalevich.com/backend/";
+// const domain = "http://localhost:8000/";
+const domain = "https://apalevich.com/backend/";
 
 let cache = chrome.runtime.onMessage.addListener(
   (req, _sender, sendResponse) => {
