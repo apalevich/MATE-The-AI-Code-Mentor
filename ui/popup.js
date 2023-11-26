@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", triggerAction);
 
-// const messageElement = document.querySelector(".page");
 const loadingAnimationContainer = document.getElementById("loading-animation");
 const resultContainer = document.getElementById("result");
 const resultFeedback = document.getElementById("feedback");
@@ -21,13 +20,12 @@ const generateList = (arr) => {
 };
 
 async function triggerAction() {
-  // messageElement.textContent = "loading";
   const tab = await chrome.tabs.query({ active: true, currentWindow: true });
   const { id, url } = tab[0];
 
   const urlEncoded = new URL(url);
   if (urlEncoded.host !== "github.com") {
-    messageElement.textContent = "Visit Github please";
+    resultContainer.textContent = "Visit Github please";
     return;
   }
 
@@ -49,13 +47,18 @@ async function triggerAction() {
       resultSuggestion.textContent = suggestion;
       console.log(response);
     } else {
-      resultContainer = "Response not found or empty";
+      resultFeedback.textContent = "Response not found or empty";
       console.log(response);
     }
   } catch (error) {
     const errorMessage = error;
     console.error("Error from popup.js:", errorMessage);
-    messageElement.textContent = `Error from popup.js: ${errorMessage}"`;
+    resultFeedback.textContent = `Error from popup.js: ${errorMessage}"`;
   }
   toggleContainers();
 }
+
+document.querySelector("#links form").onsubmit = (e) => {
+  document.getElementById("log").classList.toggle("hidden");
+  document.querySelector("#links form").classList.toggle("hidden");
+};

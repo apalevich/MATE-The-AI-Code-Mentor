@@ -1,13 +1,13 @@
+:root {
+    --font: "Courier New", Courier, monospace;
+}
+
 html,
 body {
     width: 300px;
     height: 500px;
-    /* display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    flex-wrap: nowrap; */
     margin: 0;
-    font-family: "Courier New", Courier, monospace;
+    font-family: var(--font);
     background-color: lightgray;
 }
 
@@ -29,14 +29,14 @@ body {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 #result {
     overflow: auto;
 }
 
-#result .response_box {
+.response_box {
     margin: 20px;
     padding: 20px;
     border: 1px solid #000;
@@ -47,7 +47,21 @@ body {
     margin-bottom: 10px;
 }
 
-/* ANIMATION */
+#links form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: space-evenly;
+    padding: 8px 0;
+}
+
+#links input,
+#links textarea {
+    font-family: var(--font);
+    font-size: 0.75rem;
+}
+
+/* LOADING ANIMATION */
 .lds-ring {
     display: inline-block;
     position: relative;

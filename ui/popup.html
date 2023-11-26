@@ -20,19 +20,59 @@
         </div>
         <div class="hidden" id="result">
             <div class="response_box">
-                <h2>Your review:</h2>
-                <p id="feedback">loading...</p>
+                <h2>MATE says:</h2>
+                <p id="feedback"></p>
             </div>
             <div class="response_box">
-                <h3>Что сделано хорошо</h3>
-                <p id="positive">Positive feedback content...</p>
-                <h3>Что можно улучшить</h3>
-                <p id="negative">Constructive feedback content...</p>
+                <h3>Strengths</h3>
+                <p id="positive"></p>
+                <h3>Weaknesses</h3>
+                <p id="negative"></p>
             </div>
             <div class="response_box">
-                <h2>Рекомендации</h2>
-                <p id="suggestion">loading...</p>
+                <h2>Recomendations</h2>
+                <p id="suggestion"></p>
             </div>
+        </div>
+        <div id="links">
+            <details class="response_box">
+                <summary>Send a feedback</summary>
+                <form
+                    action="https://apalevich.com/backend/mate/feedback"
+                    method="POST"
+                >
+                    <a
+                        href="https://apalevich.com/mate/feedback"
+                        target="_blank"
+                        >Open in a new tab</a
+                    >
+                    <textarea
+                        name="Notes"
+                        id="notes"
+                        rows="6"
+                        minlength="10"
+                        placeholder="Write whatever comes to you"
+                        autofocus
+                        required
+                    ></textarea>
+                    <input
+                        type="email"
+                        name="Email"
+                        id="email"
+                        placeholder="Email"
+                        required
+                    />
+
+                    <!-- add hidden Honeypot input to prevent spams -->
+                    <input type="hidden" name="_gotcha" class="hidden" />
+                    <button type="submit" class="bg-gradient border-rounded">
+                        Send
+                    </button>
+                </form>
+                <p id="log" class="hidden">
+                    Your feedback received. Thanks you
+                </p>
+            </details>
         </div>
         <script src="popup.js"></script>
     </body>

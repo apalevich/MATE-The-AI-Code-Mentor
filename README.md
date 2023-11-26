@@ -12,15 +12,15 @@ It is powered by fine-tuned GPT assistant.
 
 ## Future releases
 
-0.3 (Beta stage) Add features for collecting feedback
-- [ ] Добавить сбор обратной связи из поля
-- [ ] Добавить кэширование результата
-
 0.4 Add support for Pull Requests
 - [ ] Настроить фильтрацию страниц GitHub
 - [ ] Добавить описание задачи для контекста
 
 ## Past Releases
+
+0.3 (Beta stage) Add features for collecting feedback
+- [x] Добавить сбор обратной связи из поля
+- [x] Добавить кэширование результата
 
 0.2 Implement base functionality
 - [x] Парсить код
