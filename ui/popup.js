@@ -25,7 +25,8 @@ async function triggerAction() {
 
   const urlEncoded = new URL(url);
   if (urlEncoded.host !== "github.com") {
-    resultContainer.textContent = "Visit Github please";
+    resultContainer.innerHTML = "<h1>Visit Github please</h1>";
+    toggleContainers();
     return;
   }
 
@@ -47,7 +48,7 @@ async function triggerAction() {
       resultSuggestion.textContent = suggestion;
       console.log(response);
     } else {
-      resultFeedback.textContent = "Response not found or empty";
+      resultFeedback.innerHTML = `<h1>Bad response</h1><div>${response.text}</div>`;
       console.log(response);
     }
   } catch (error) {
