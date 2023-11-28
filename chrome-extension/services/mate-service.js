@@ -9,7 +9,7 @@ export default class MateService {
           sendResponse({ ok: false, text: "Error: No code found on the webpage" });
         }
     
-        fetch(${this._apiBase}/analyze, {
+        fetch(`${this._apiBase}/analyze`, {
           method: "POST",
           body: JSON.stringify({
             content: parsedText,
