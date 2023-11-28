@@ -1,6 +1,4 @@
-
-
-const MateService = require('../services/mate-service.js');
+const MateService = require('../services/mate-service');
 
 const service = new MateService();
 cachedReview = null;

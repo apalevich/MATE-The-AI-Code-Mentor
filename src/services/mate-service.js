@@ -1,8 +1,7 @@
 export default class MateService {
-
     _apiBase = 'https://apalevich.com/backend/mate';
 
-    getReview = () => {
+    getReview() {
         const parsedText = document.getElementById("read-only-cursor-text-area");;
     
         if (!parsedText) {
