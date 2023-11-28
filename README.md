@@ -22,15 +22,23 @@ _Coming soon:_
 
 Suggestions are welcome at [hello@apalevich.com](mailto:hello@apalevich.com)
 
-# Releases
-
-## Future releases
+# Coming updates
 
 **0.4 Architecture improvements**
 - [ ] Use Parcel as a bundler
 - [ ] Update files structure
 - [ ] Improve architecture
 - [ ] Make the repo public accessible?
+
+**0.? Design improvements**
+- [ ] Integrate UI library
+- [ ] Set the library config (themes, fonts)
+- [ ] Implement new design on pages
+
+**0.? Auth for users**
+- [ ] Integrate BaaS solution
+- [ ] Develop login page
+- [ ] Route auth/unauth user
 
 **0.? Support for Pull Requests**
 
