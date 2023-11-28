@@ -26,14 +26,20 @@ Suggestions are welcome at [hello@apalevich.com](mailto:hello@apalevich.com)
 
 ## Future releases
 
-**0.4 Added support for Pull Requests**
+**0.4 Architecture improvements**
+- [ ] Use Parcel as a bundler
+- [ ] Update files structure
+- [ ] Improve architecture
+- [ ] Make the repo public accessible?
 
-- [ ] Improved filtering of GitHub pages
+**0.? Support for Pull Requests**
+
+- [ ] Improve filtering of GitHub pages
 - [ ] Add task descriptions for context
 
 ## Past Releases
 
-**0.3 (beta) Added features for collecting feedback**
+**0.3 (beta) Features for collecting feedback**
 
 - [ ] Add feedback collection from a field
 - [ ] Add result caching
