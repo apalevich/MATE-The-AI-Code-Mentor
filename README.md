@@ -1,34 +1,49 @@
-# Introduction
+# What is MATE
 
-MATE, or Mentorship and AI Technology Enhancer, is an AI-based companion for code review and development.
+MATE (an acronym for Mentorship and AI Technology Enhancer) is your invaluable assistant in code review and development. MATE provides code insight through the power of a finely tuned AI model.
 
-It is powered by fine-tuned GPT assistant.
+## Key features
 
-## Supports:
-- Chrome browser as an extension
-- Firefox browser as an extension (coming soon)
-- Safari browser as an extension (coming soon)
-- ChatGPT assistance via web interface (coming soon)
+1. **Mentoring**: MATE offers personalized guidance and advice, making you feel like you have an experienced mentor by your side 24/7.
+
+2. **AI Technology**: Using advanced artificial intelligence, MATE ensures that your code is not only functional, but also optimized for efficiency and best practices.
+
+3. **Enhanced Learning**: Learn from your code and MATE's recommendations and watch your proficiency grow with each project.
+
+# How to use
+
+MATE comes in a variety of options, allowing users to choose which user interface suits them best:
+
+- Chrome Extension
+
+_Coming soon:_
+- Extension for Firefox
+- Extension for Safari
+
+Suggestions are welcome at [hello@apalevich.com](mailto:hello@apalevich.com)
+
+# Releases
 
 ## Future releases
 
-0.4 Add support for Pull Requests
-- [ ] Настроить фильтрацию страниц GitHub
-- [ ] Добавить описание задачи для контекста
+**0.4 Added support for Pull Requests**
+
+- [ ] Improved filtering of GitHub pages
+- [ ] Add task descriptions for context
 
 ## Past Releases
 
-0.3 (Beta stage) Add features for collecting feedback
-- [x] Добавить сбор обратной связи из поля
-- [x] Добавить кэширование результата
+**0.3 (beta) Added features for collecting feedback**
 
-0.2 Implement base functionality
-- [x] Парсить код
-- [x] Отправлять код на сервер
-- [x] Отправлять промпт с сервера в OpenAI API
-- [x] Отправлять результат с сервера в попап
+- [ ] Add feedback collection from a field
+- [ ] Add result caching
 
-0.1 Mock-up
-- [x] In the developer mode, the Chrome successfully loads the Extesion, no errors thrown
-- [x] The Extension opens a popup by clicking on the icon
-- [x] The popup shows "loading" status while sending a request to the server and displays the result when the response comes
+**0.2 Basic functionality implementation**
+
+- [x] Parse code
+- [x] Send code to the server
+- [x] Build prompt in OpenAI API
+- [x] Return results to popup
+
+**0.1 Prototype**
+- [ ] In Chrome popup loads without errors
