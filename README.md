@@ -30,6 +30,11 @@ Suggestions are welcome at [hello@apalevich.com](mailto:hello@apalevich.com)
 - [ ] Improve architecture
 - [ ] Make the repo public accessible?
 
+**0.5 Support for Pull Requests**
+
+- [ ] Improve filtering of GitHub pages
+- [ ] Add task descriptions for context
+
 **0.? Design improvements**
 - [ ] Integrate UI library
 - [ ] Set the library config (themes, fonts)
@@ -39,11 +44,6 @@ Suggestions are welcome at [hello@apalevich.com](mailto:hello@apalevich.com)
 - [ ] Integrate BaaS solution
 - [ ] Develop login page
 - [ ] Route auth/unauth user
-
-**0.? Support for Pull Requests**
-
-- [ ] Improve filtering of GitHub pages
-- [ ] Add task descriptions for context
 
 ## Past Releases
 
