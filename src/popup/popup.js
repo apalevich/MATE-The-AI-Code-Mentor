@@ -52,9 +52,8 @@ async function triggerAction() {
       console.log(response);
     }
   } catch (error) {
-    const errorMessage = error;
-    console.error("Error from popup.js:", errorMessage);
-    resultFeedback.textContent = `Error from popup.js: ${errorMessage}"`;
+    console.error("Error from popup.js:", error);
+    resultFeedback.textContent = `Error from popup.js: ${error}"`;
   }
   toggleContainers();
 }

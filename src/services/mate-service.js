@@ -23,5 +23,8 @@ export default class MateService {
           }
           return response.json();
         })
+        .catch(err => {
+          throw new Error(`Request failed with status: ${err}`);
+        })
     }
 }

@@ -1,35 +1,58 @@
-const MateService = require('../services/mate-service');
+console.log("Content script is running");
 
-const service = new MateService();
-cachedReview = null;
+const parsedText = parseTextFromDiv();
+const domain = "https://apalevich.com/backend/";
+let cache = null;
 
-const actions = {
-  'getReview': function (sendResponse) {
-    if (cachedReview && cachedReview.ok) {
-      alert(cachedReview);
-      sendResponse(cachedReview);
+function handleGetReview() {
+  const apiUrl = `${domain}mate/analyze`;
+
+  return fetch(apiUrl, {
+    method: "POST",
+    body: JSON.stringify({ content: parsedText }),
+    headers: { "Content-Type": "application/json" }
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`Request failed with status: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then(responseData => {
+    const resultsWrapper = { ok: true, responseData };
+    return resultsWrapper;
+  })
+  .catch(error => {
+    return { ok: false, text: "Error: " + error.message };
+  });
+}
+
+chrome.runtime.onMessage.addListener((req, _sender, sendResponse) => {
+  if (req.action === "getReview") {
+    if (!parsedText) {
+      sendResponse({ ok: false, text: "Error: No code found on the webpage" });
       return true;
     }
 
-    service.getReview
-    .then((responseData) => {
-      const resultsWrapper = { ok: true, responseData };
-      cachedReview = resultsWrapper;
-      sendResponse(resultsWrapper);
-    })
-    .catch((error) =>
-      sendResponse({ ok: false, text: "Error: " + error.message }),
-    );
+    if (cache) {
+      sendResponse(cache);
+      return true;
+    }
+
+    handleGetReview()
+    .then(result => {
+      cache = result;
+      sendResponse(result);
+    });
 
     return true; // keeps the message channel open until sendResponse is called
-  }
-};
-
-chrome.runtime.onMessage.addListener((req, _sender, sendResponse) => {
-  try {
-    alert(req.action)
-    actions[req.action](sendResponse);
-  } catch (error) {
+  } else {
     sendResponse({ ok: false, text: `Error: wrong action "${req.action}"` });
-  }  
+    return true; // keeps the message channel open until sendResponse is called
+  }
 });
+
+function parseTextFromDiv() {
+  const divElement = document.getElementById("read-only-cursor-text-area");
+  return divElement ? divElement.textContent : null;
+}
