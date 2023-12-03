@@ -24,16 +24,19 @@ Suggestions are welcome at [hello@apalevich.com](mailto:hello@apalevich.com)
 
 # Coming updates
 
-**0.4 Architecture improvements**
-- [ ] Use Parcel as a bundler
-- [ ] Update files structure
-- [ ] Improve architecture
-- [ ] Make the repo public accessible?
-
 **0.5 Support for Pull Requests**
-
 - [ ] Improve filtering of GitHub pages
 - [ ] Add task descriptions for context
+
+**0.6 Design improvements**
+- [ ] Integrate UI library
+- [ ] Set the library config (themes, fonts)
+- [ ] Implement new design on pages
+
+**0.7 Auth for users**
+- [ ] Integrate BaaS solution
+- [ ] Develop login page
+- [ ] Route auth/unauth user
 
 **0.? Design improvements**
 - [ ] Integrate UI library
@@ -46,6 +49,12 @@ Suggestions are welcome at [hello@apalevich.com](mailto:hello@apalevich.com)
 - [ ] Route auth/unauth user
 
 ## Past Releases
+
+**0.4 Architecture improvements**
+- [x] Use Parcel as a bundler
+- [x] Update files structure
+- [x] Improve architecture
+- [ ] Make the repo public accessible?
 
 **0.3 (beta) Features for collecting feedback**
 
