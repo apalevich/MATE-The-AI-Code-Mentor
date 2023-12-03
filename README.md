@@ -48,8 +48,8 @@ Suggestions are welcome at [hello@apalevich.com](mailto:hello@apalevich.com)
 
 **0.3 (beta) Features for collecting feedback**
 
-- [ ] Add feedback collection from a field
-- [ ] Add result caching
+- [x] Add feedback collection from a field
+- [x] Add result caching
 
 **0.2 Basic functionality implementation**
 
