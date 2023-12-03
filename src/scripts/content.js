@@ -1,40 +1,9 @@
-console.log("Content script is running");
+const { MateService } = require("../services/mate-service");
 
 const parsedText = parseTextFromDiv();
 let cache = null;
 
-class MateService {
-  domain = "https://apalevich.com/backend/";
-  apiUrl = `${this.domain}mate/analyze`;
-
-  getReview() {
-  
-      if (!parsedText) {
-        sendResponse({ ok: false, text: "Error: No code found on the webpage" });
-      }
-  
-      return fetch(this.apiUrl, {
-        method: "POST",
-        body: JSON.stringify({ content: parsedText }),
-        headers: { "Content-Type": "application/json" }
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`Request failed with status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(responseData => {
-        const resultsWrapper = { ok: true, responseData };
-        return resultsWrapper;
-      })
-      .catch(error => {
-        return { ok: false, text: "Error: " + error.message };
-      });
-  }
-}
-
-const service = new MateService();
+const service = new MateService(parsedText);
 
 chrome.runtime.onMessage.addListener((req, _sender, sendResponse) => {
   if (req.action === "getReview") {
@@ -55,10 +24,10 @@ chrome.runtime.onMessage.addListener((req, _sender, sendResponse) => {
       return true;
     });
 
-    return true; // keeps the message channel open until sendResponse is called
+    return true; 
   } else {
     sendResponse({ ok: false, text: `Error: wrong action "${req.action}"` });
-    return true; // keeps the message channel open until sendResponse is called
+    return true; 
   }
 });
 
