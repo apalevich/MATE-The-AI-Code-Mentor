@@ -1,31 +1,40 @@
 console.log("Content script is running");
 
 const parsedText = parseTextFromDiv();
-const domain = "https://apalevich.com/backend/";
 let cache = null;
 
-function handleGetReview() {
-  const apiUrl = `${domain}mate/analyze`;
+class MateService {
+  domain = "https://apalevich.com/backend/";
+  apiUrl = `${this.domain}mate/analyze`;
 
-  return fetch(apiUrl, {
-    method: "POST",
-    body: JSON.stringify({ content: parsedText }),
-    headers: { "Content-Type": "application/json" }
-  })
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(`Request failed with status: ${response.status}`);
-    }
-    return response.json();
-  })
-  .then(responseData => {
-    const resultsWrapper = { ok: true, responseData };
-    return resultsWrapper;
-  })
-  .catch(error => {
-    return { ok: false, text: "Error: " + error.message };
-  });
+  getReview() {
+  
+      if (!parsedText) {
+        sendResponse({ ok: false, text: "Error: No code found on the webpage" });
+      }
+  
+      return fetch(this.apiUrl, {
+        method: "POST",
+        body: JSON.stringify({ content: parsedText }),
+        headers: { "Content-Type": "application/json" }
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Request failed with status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(responseData => {
+        const resultsWrapper = { ok: true, responseData };
+        return resultsWrapper;
+      })
+      .catch(error => {
+        return { ok: false, text: "Error: " + error.message };
+      });
+  }
 }
+
+const service = new MateService();
 
 chrome.runtime.onMessage.addListener((req, _sender, sendResponse) => {
   if (req.action === "getReview") {
@@ -39,10 +48,11 @@ chrome.runtime.onMessage.addListener((req, _sender, sendResponse) => {
       return true;
     }
 
-    handleGetReview()
+    service.getReview()
     .then(result => {
       cache = result;
       sendResponse(result);
+      return true;
     });
 
     return true; // keeps the message channel open until sendResponse is called
