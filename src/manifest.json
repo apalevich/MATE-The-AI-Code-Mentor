@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "MATE: The AI Code Mentor",
-  "version": "0.4.0",
+  "name": "MATE The AI Code Mentor",
+  "version": "0.5.0",
   "description": "Get the best code review possible with a finely-tuned GPT",
   "permissions": ["activeTab"],
   "action": {
@@ -10,7 +10,7 @@
   },
   "content_scripts": [
     {
-      "js": ["content/content.js"],
+      "js": ["scripts/content.js"],
       "matches": ["https://*.github.com/*"]
     }
   ]

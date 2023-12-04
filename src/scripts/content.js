@@ -1,4 +1,4 @@
-const { MateService } = require("../services/mate-service");
+const { MateService } = require("./mate-service");
 
 const parsedText = parseTextFromDiv();
 let cache = null;
