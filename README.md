@@ -24,9 +24,10 @@ Suggestions are welcome at [hello@apalevich.com](mailto:hello@apalevich.com)
 
 # Coming updates
 
-**0.5 Support for Pull Requests**
-- [ ] Improve filtering of GitHub pages
-- [ ] Add task descriptions for context
+**0.5 Other platforms**
+- [ ] Start using GPT Assistance
+- [ ] Make GPT prompt modular
+- [ ] Implement Firefox and Safari extensions
 
 **0.6 Design improvements**
 - [ ] Integrate UI library
@@ -37,6 +38,10 @@ Suggestions are welcome at [hello@apalevich.com](mailto:hello@apalevich.com)
 - [ ] Integrate BaaS solution
 - [ ] Develop login page
 - [ ] Route auth/unauth user
+
+**0.x Support for Pull Requests**
+- [ ] Improve filtering of GitHub pages
+- [ ] Add task descriptions for context
 
 ## Past Releases
 
