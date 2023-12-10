@@ -23,6 +23,11 @@ async function triggerAction() {
   const tab = await chrome.tabs.query({ active: true, currentWindow: true });
   const { id, url } = tab[0];
 
+  if (!tab[0]) {
+    resultContainer.innerHTML = "Error detecting the browser tab";
+    return false;
+  }
+
   const urlEncoded = new URL(url);
   if (urlEncoded.host !== "github.com") {
     resultContainer.innerHTML = "<h1>Visit Github please</h1>";
