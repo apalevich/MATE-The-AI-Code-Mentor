@@ -7,7 +7,9 @@ const GitHubCodeAnalyzer = () => {
 
   return (
     <div>
-      {reviewResult ? reviewResult.responseData.choices[0].message.content : 'Подождите'}
+      {reviewResult
+      ? JSON.parse(reviewResult.responseData.choices[0].message.content).feedback
+      : 'Подождите'}
     </div>
   );
 };
