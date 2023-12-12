@@ -65,3 +65,7 @@ Suggestions are welcome at [hello@apalevich.com](mailto:hello@apalevich.com)
 
 **0.1 Prototype**
 - [ ] In Chrome popup loads without errors
+
+# Credits
+
+This is a [Plasmo extension](https://docs.plasmo.com/) project bootstrapped with [`plasmo init`](https://www.npmjs.com/package/plasmo).

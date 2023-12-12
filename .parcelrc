@@ -1,6 +1,0 @@
-{
-  "extends": "@parcel/config-webextension",
-  "transformers": {
-    "*.json": ["parcel-transformer-manifest-version"]
-  }
-}
