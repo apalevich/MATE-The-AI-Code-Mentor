@@ -15,10 +15,14 @@ export class MateService {
           throw new Error(`Request failed with status: ${response.status}`);
         }
         const responseData = await response.json();
-        const resultsWrapper = { ok: true, responseData };
+        const resultsWrapper = { ok: true, result: this._extractResult(responseData) };
         return resultsWrapper;
       } catch (error) {
         return { ok: false, text: "Error: " + error.message };
       }
+    }
+
+    _extractResult(responseData) {
+      return responseData.choices[0].message.content
     }
   }

@@ -4,12 +4,13 @@ import "~style.css"
 const GitHubCodeAnalyzer = () => {
   const [reviewResult] = useStorage("review")
 
-
   return (
-    <div>
-      {reviewResult
-      ? JSON.parse(reviewResult.responseData.choices[0].message.content).feedback
-      : 'Подождите'}
+    <div className="plasmo-container">
+      <div className="plasmo-mx-auto">
+        {reviewResult
+        ? JSON.parse(reviewResult.result).feedback
+        : 'Подождите'}
+      </div>
     </div>
   );
 };
