@@ -3,14 +3,15 @@ import "~style.css"
 import LoadingAnimation from "~components/loader";
 import Header from "~components/header";
 import Footer from "~components/footer";
+import PieChart from "~components/piechart";
 
 const ResultContainer = () => {
   return (
     <div className="tw-py-16">
       <div className="tw-m-auto tw-px-6 tw-text-grey-600">
         <div className="tw-rounded-[4rem] tw-space-y-6 tw-flex tw-flex-col tw-justify-center">
-          <div>
-            Pie chart
+          <div className="tw-text-center">
+            <PieChart value="60" />
           </div>
           <div>
             <h2 className="tw-text-3xl tw-font-bold tw-text-grey-900 tw-dark:text-white">
