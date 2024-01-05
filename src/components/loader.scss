@@ -1,0 +1,76 @@
+// Settings
+// ======================
+// speed
+$duration: 5s;
+// gap
+$delay: -0.1s;
+// wave motion
+$timing: ease-in-out;
+// number on lines
+$lines: 20;
+// arc gap
+$size: 100%;
+// arc rotation
+$rotation: 200deg;
+
+body {
+  background-color: black;
+  .box {    // border: 2px solid white
+    // overflow: hidden
+    width: 240px;
+    height: 240px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    .line {
+      margin-bottom: 8px;
+      width: 100%;
+      height: 100%;
+      border: {
+        color: #fff #fff #fff #fff;
+        radius: 50%;
+        style: solid;
+        width: 4x;
+      }
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      animation: {
+        name: move;
+        duration: $duration;
+        timing-function: $timing;
+        iteration-count: infinite;
+        direction: alternate;
+      };
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+@keyframes move {
+  from {
+    transform: translate(-50%,-50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%,-50%) rotate($rotation);
+  }
+}
+
+
+@for $i from 1 through $lines {
+  $radius: ($i / $lines) * $size;
+  $lineDelay: $i * $delay;
+
+  .line-#{$i} {
+    padding-top: $radius;
+    width: $radius;
+    animation: {
+      delay: $lineDelay;
+    }
+  }
+}
