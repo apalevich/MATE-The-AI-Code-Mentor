@@ -1,11 +1,11 @@
 export class MateService {
-    constructor(data) {
+    constructor() {
       this.domain = "https://apalevich.com/backend/";
       this.apiUrl = `${this.domain}mate/analyze`;
     }
   
     async getReview(parsedCode = '') {  
-        try {
+      try {
         const response = await fetch(this.apiUrl, {
           method: "POST",
           body: JSON.stringify({ content: parsedCode }),
