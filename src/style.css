@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-    --font: "Courier New", Courier, monospace;
-}
-
 @layer {
     body {
         width: 300px;
