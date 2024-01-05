@@ -6,8 +6,9 @@
     --font: "Courier New", Courier, monospace;
 }
 
-html,
-body {
-    width: 300px;
-    height: 500px;
+@layer {
+    body {
+        width: 300px;
+        height: 500px;
+    }
 }
