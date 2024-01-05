@@ -1,4 +1,4 @@
-export class MateService {
+export default class MateService {
     constructor() {
       this.domain = "https://apalevich.com/backend/";
       this.apiUrl = `${this.domain}mate/analyze`;
