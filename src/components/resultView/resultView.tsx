@@ -60,7 +60,7 @@ const ResultView = ({
             </div>
           </div>
         </div>
-      </div>                         
+      </div>
     )
   }
 
