@@ -1,6 +1,7 @@
 export default class MateService {
     constructor() {
       this.domain = "https://apalevich.com/backend/";
+      // this.domain = 'http://localhost:8000/'
       this.apiUrl = `${this.domain}mate/analyze`;
     }
   
