@@ -1,0 +1,31 @@
+.circle {
+    width: 10px; height: 10px;
+    background: blueviolet;
+    margin: 5px 10px;
+    border-radius: 50%;
+    transform-origin: top center;
+    animation: spin 1s linear infinite;
+}
+
+.row {
+    display: flex;
+    flex: 0 1 100%;
+}
+
+.row:nth-child(1) .circle {animation-delay: 100ms;} /* = 0.1s */
+.row:nth-child(2) .circle {animation-delay: 200ms;} /* = 0.1s */
+.row:nth-child(3) .circle {animation-delay: 300ms;} /* = 0.1s */
+.row:nth-child(4) .circle {animation-delay: 400ms;} /* = 0.1s */
+.row:nth-child(5) .circle {animation-delay: 500ms;} /* = 0.1s */
+.row:nth-child(6) .circle {animation-delay: 600ms;} /* = 0.1s */
+.row:nth-child(7) .circle {animation-delay: 700ms;} /* = 0.1s */
+.row:nth-child(8) .circle {animation-delay: 800ms;} /* = 0.1s */
+.row:nth-child(9) .circle {animation-delay: 900ms;} /* = 0.1s */
+.row:nth-child(10) .circle {animation-delay: 1000ms;} /* = 0.1s */
+.row:nth-child(11) .circle {animation-delay: 1100ms;} /* = 0.1s */
+
+@keyframes spin {
+    0% {transform: rotate(0) scale(1.1);}
+    50% {transform: rotate(180deg) scale(0.2);}
+    100% {transform: rotate(360deg) scale(1.1);}
+}
