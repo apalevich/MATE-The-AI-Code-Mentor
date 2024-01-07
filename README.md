@@ -28,6 +28,7 @@ Suggestions are welcome at [hello@apalevich.com](mailto:hello@apalevich.com)
 - [ ] Create cache for the reviews
 - [ ] Implement system to track code updates
 - [ ] Make recommendations more specific
+- [ ] Improve IU
 
 **0.8 Auth for users**
 - [ ] Integrate BaaS solution
