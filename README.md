@@ -24,26 +24,33 @@ Suggestions are welcome at [hello@apalevich.com](mailto:hello@apalevich.com)
 
 # Coming updates
 
-**0.5 Other platforms**
-- [ ] Start using GPT Assistance
-- [ ] Make GPT prompt modular
-- [ ] Implement Firefox and Safari extensions
+**0.7 Cache optimization**
+- [ ] Create cache for the reviews
+- [ ] Implement system to track code updates
+- [ ] Make recommendations more specific
 
-**0.6 Design improvements**
-- [ ] Integrate UI library
-- [ ] Set the library config (themes, fonts)
-- [ ] Implement new design on pages
-
-**0.7 Auth for users**
+**0.8 Auth for users**
 - [ ] Integrate BaaS solution
 - [ ] Develop login page
 - [ ] Route auth/unauth user
+
+**0.x Stripe integration**
 
 **0.x Support for Pull Requests**
 - [ ] Improve filtering of GitHub pages
 - [ ] Add task descriptions for context
 
 ## Past Releases
+
+**0.6 Design improvements**
+- [x] Integrate UI library
+- [x] Set the library config (themes, fonts)
+- [x] Implement new design on pages
+
+**0.5 Other platforms**
+- [ ] Start using GPT Assistance (rejected)
+- [x] Update the GPT prompt
+- [x] Implement the scalable Plasmo framework
 
 **0.4 Architecture improvements**
 - [x] Use Parcel as a bundler
