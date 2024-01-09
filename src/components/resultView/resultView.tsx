@@ -44,9 +44,12 @@ const ResultView = ({
           <div className="tw-rounded-[4rem] tw-space-y-6 tw-flex tw-flex-col tw-justify-center">
             <div className="tw-flex tw-items-end">
               <PieChart value={overallScore} />
-              <h2 className="tw-text-5xl tw-font-bold tw-text-grey-900 tw-dark:text-white tw-basis-2">
-                {shortestFeedback}
-              </h2>
+              <div className="tw-flex tw-flex-col">
+                <p className="tw-text-xl">{overallScore}%</p>
+                <h2 className="tw-text-5xl tw-font-bold tw-text-grey-900 tw-dark:text-white tw-basis-2">
+                  {shortestFeedback}
+                </h2>
+              </div>
             </div>
             <div>
               <p className="tw-my-8 tw-text-grey-600 tw-dark:text-grey-300">
