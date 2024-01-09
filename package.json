@@ -1,6 +1,6 @@
 {
   "name": "MATE: The AI Code Mentor",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Get the best code review possible with a finely-tuned GPT",
   "author": "hello@apalevich.com",
   "scripts": {
