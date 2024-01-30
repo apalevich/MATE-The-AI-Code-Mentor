@@ -2,14 +2,15 @@ import type { PlasmoMessaging } from "@plasmohq/messaging"
 import { Storage } from "@plasmohq/storage"
 import MateService from "src/mate-service";
 import md5 from "blueimp-md5";
+import type {ResultViewProps} from '~components/resultView'
 
 const storage = new Storage();
 const service = new MateService();
 storage.removeAll() //REMOVE BEFORE THE MERGING
 
-type reviewType = {
+export type ReviewType = {
   id: string,
-  result: object,
+  result: ResultViewProps,
   reqStatus?: boolean
 };
  
@@ -22,7 +23,7 @@ const handler: PlasmoMessaging.MessageHandler = async (req, _res) => {
   const sourceCode = req.body.content;
   const hash = md5(sourceCode);
 
-  const previousReviews: reviewType[] = await storage.get('previousReviews') || [];
+  const previousReviews: ReviewType[] = await storage.get('previousReviews') || [];
 
   let review = await getCachedReview(previousReviews, hash);
   

@@ -1,3 +1,3 @@
-import ResultView from './resultView';
+import { ResultView, ResultViewProps } from './resultView';
 
-export default ResultView;
+export { ResultView, ResultViewProps };

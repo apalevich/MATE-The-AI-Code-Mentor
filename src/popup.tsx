@@ -3,10 +3,11 @@ import "~style.css";
 import LoadingAnimation from "~components/loader";
 import Header from "~components/header";
 import Footer from "~components/footer";
-import ResultView from "~components/resultView";
+import {ResultView} from "~components/resultView";
+import type { ReviewType } from "~background/messages/review";
 
 const GitHubCodeAnalyzer = () => {
-  const [currentReview] = useStorage("currentReview");
+  const [currentReview] = useStorage<ReviewType>("currentReview");
 
   return (
     <div className="tw-h-100 tw-w-screen tw-flex tw-flex-col tw-justify-between tw-bg-bg-primary">

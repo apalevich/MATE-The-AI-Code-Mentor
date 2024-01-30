@@ -5,7 +5,7 @@ type RecommendationObject = {
     description: string;
 };
 
-type ResultViewProps = {
+export type ResultViewProps = {
     overallScore: number | string;
     shortestFeedback: string;
     overallFeedback: string;
@@ -31,7 +31,7 @@ const renderRecommendations = (recommendations, fillColor) => {
     )) : null;
 };
 
-const ResultView = ({
+export const ResultView = ({
     overallScore,
     shortestFeedback,
     overallFeedback,
@@ -66,5 +66,3 @@ const ResultView = ({
       </div>
     )
   }
-
-  export default ResultView
