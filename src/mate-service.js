@@ -16,10 +16,9 @@ export default class MateService {
           throw new Error(`Request failed with status: ${response.status}`);
         }
         const responseData = await response.json();
-        const resultsWrapper = { ok: true, result: this._extractResult(responseData) };
-        return resultsWrapper;
+        return { ok: true, result: this._extractResult(responseData) };
       } catch (error) {
-        return { ok: false, text: "Error: " + error.message };
+        return { ok: false, result: "Error: " + error.message };
       }
     }
 
