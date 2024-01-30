@@ -1,17 +1,5 @@
 import PieChart from "~components/piechart";
-
-type RecommendationObject = {
-    title: string;
-    description: string;
-};
-
-export type ResultViewProps = {
-    overallScore: number | string;
-    shortestFeedback: string;
-    overallFeedback: string;
-    mustHaveRecommendations: RecommendationObject[];
-    niceToHaveRecommendations: RecommendationObject[];
-};
+import type { ResultViewProps } from "~types/types";
 
 const renderRecommendations = (recommendations, fillColor) => {
     return recommendations?.length ? recommendations.map((recommendation, index) => (

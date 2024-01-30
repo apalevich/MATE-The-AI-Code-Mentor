@@ -2,17 +2,13 @@ import type { PlasmoMessaging } from "@plasmohq/messaging"
 import { Storage } from "@plasmohq/storage"
 import MateService from "src/mate-service";
 import md5 from "blueimp-md5";
-import type {ResultViewProps} from '~components/resultView'
+import type { ReviewType } from "~types/types";
 
 const storage = new Storage();
 const service = new MateService();
 storage.removeAll() //REMOVE BEFORE THE MERGING
 
-export type ReviewType = {
-  id: string,
-  result: ResultViewProps,
-  reqStatus?: boolean
-};
+
  
 const getCachedReview = async (previousReviews, id) => {
   const cachedReview = previousReviews.find(r => r.id === id);

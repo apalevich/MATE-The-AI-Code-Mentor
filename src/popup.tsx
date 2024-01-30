@@ -4,7 +4,7 @@ import LoadingAnimation from "~components/loader";
 import Header from "~components/header";
 import Footer from "~components/footer";
 import {ResultView} from "~components/resultView";
-import type { ReviewType } from "~background/messages/review";
+import type { ReviewType } from "~types/types";
 
 const GitHubCodeAnalyzer = () => {
   const [currentReview] = useStorage<ReviewType>("currentReview");
