@@ -1,5 +1,5 @@
 {
-  "name": "MATE: The AI Code Mentor",
+  "name": "mate-the-ai-code-mentor",
   "version": "0.7.0",
   "description": "Get the best code review possible with a finely-tuned GPT",
   "author": "hello@apalevich.com",
@@ -12,6 +12,7 @@
     "@plasmohq/messaging": "^0.6.1",
     "@plasmohq/storage": "^1.9.0",
     "axios": "^1.6.2",
+    "blueimp-md5": "^2.19.0",
     "plasmo": "0.84.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
