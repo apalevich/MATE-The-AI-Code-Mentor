@@ -17,6 +17,9 @@ dependencies:
   blueimp-md5:
     specifier: ^2.19.0
     version: 2.19.0
+  detect-url-change:
+    specifier: ^1.0.2
+    version: 1.0.2
   plasmo:
     specifier: 0.84.2
     version: 0.84.2(postcss@8.4.31)(react-dom@18.2.0)(react@18.2.0)
@@ -3345,6 +3348,12 @@ packages:
   /detect-libc@2.0.2:
     resolution: {integrity: sha512-UX6sGumvvqSaXgdKGUsgZWqcUyIXZ/vZTrlRT/iobiKhGL0zL4d3osHj3uqllWJK+i+sixDS/3COVEOFbupFyw==}
     engines: {node: '>=8'}
+    dev: false
+
+  /detect-url-change@1.0.2:
+    resolution: {integrity: sha512-kw8H5SvDszrszffxBpfJ0zYQWbqNMxBuxUxz4tVwZVQMhhZmVShiXrPgEZx30H+J+iXQmmm1U39Ti2nUmIlG5g==}
+    dependencies:
+      events: 3.3.0
     dev: false
 
   /didyoumean@1.2.2:

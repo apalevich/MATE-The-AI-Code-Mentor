@@ -1,21 +1,21 @@
-import type { PlasmoMessaging } from "@plasmohq/messaging"
-import { Storage } from "@plasmohq/storage"
+import type { PlasmoMessaging } from "@plasmohq/messaging";
+import { Storage } from "@plasmohq/storage";
 import MateService from "src/mate-service";
 import md5 from "blueimp-md5";
 import type { ReviewType } from "~types/types";
 
 const storage = new Storage();
 const service = new MateService();
-storage.removeAll() //REMOVE BEFORE THE MERGING
-
-
  
 const getCachedReview = async (previousReviews, id) => {
   const cachedReview = previousReviews.find(r => r.id === id);
+  console.log('Found cached review');
   return cachedReview;
 }
 
 const handler: PlasmoMessaging.MessageHandler = async (req, _res) => {
+  storage.remove('currentReview');
+
   const sourceCode = req.body.content;
   const hash = md5(sourceCode);
 
@@ -26,7 +26,7 @@ const handler: PlasmoMessaging.MessageHandler = async (req, _res) => {
   if (!review || !review.reqStatus) {
     console.log('Cached review not found, making request')
     const generatedReview = await service.getReview(req.body.content);
-    console.log(generatedReview);
+
     const { ok, result } = generatedReview;
     review = {
       id: hash,

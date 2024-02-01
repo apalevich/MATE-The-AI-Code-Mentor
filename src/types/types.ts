@@ -15,6 +15,6 @@ type ReviewType = {
   id: string,
   result: ResultViewProps,
   reqStatus?: boolean
-};
+} | undefined;
 
 export type {ResultViewProps, ReviewType};
