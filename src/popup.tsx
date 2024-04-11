@@ -10,7 +10,7 @@ const GitHubCodeAnalyzer = () => {
   const [currentReview] = useStorage<ReviewType>("currentReview");
 
   return (
-    <div className="tw-h-100 tw-w-screen tw-flex tw-flex-col tw-justify-between tw-bg-bg-primary">
+    <div className="tw-w-screen tw-flex tw-flex-col tw-justify-between tw-bg-bg-primary">
       <Header />
       <div className="tw-mx-auto tw-text-font">
         {currentReview === undefined ? (
