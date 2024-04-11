@@ -25,9 +25,9 @@ Suggestions are welcome at [hello@apalevich.com](mailto:hello@apalevich.com)
 # Coming updates
 
 **0.7 Cache optimization**
-- [ ] Create cache for the reviews
-- [ ] Implement system to track code updates
-- [ ] Make recommendations more specific
+- [x] Create cache for the reviews
+- [x] Implement system to track code updates
+- [x] Make recommendations more specific
 - [ ] Improve IU
 
 **0.9 "The hacker" release**
