@@ -30,14 +30,19 @@ Suggestions are welcome at [hello@apalevich.com](mailto:hello@apalevich.com)
 - [ ] Make recommendations more specific
 - [ ] Improve IU
 
-**0.8 Auth for users**
+**0.9 "The hacker" release**
+- [ ] Implement breakable API handler
+- [ ] Write an instruction
+- [ ] Make the repo available?
+
+**1.0 Auth for users**
 - [ ] Integrate BaaS solution
 - [ ] Develop login page
 - [ ] Route auth/unauth user
 
-**0.x Stripe integration**
+**1.x Stripe integration**
 
-**0.x Support for Pull Requests**
+**1.x Support for Pull Requests**
 - [ ] Improve filtering of GitHub pages
 - [ ] Add task descriptions for context
 
