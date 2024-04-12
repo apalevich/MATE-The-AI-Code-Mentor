@@ -24,12 +24,6 @@ Suggestions are welcome at [hello@apalevich.com](mailto:hello@apalevich.com)
 
 # Coming updates
 
-**0.7 Cache optimization**
-- [x] Create cache for the reviews
-- [x] Implement system to track code updates
-- [x] Make recommendations more specific
-- [ ] Improve IU
-
 **0.9 "The hacker" release**
 - [ ] Implement breakable API handler
 - [ ] Write an instruction
@@ -47,6 +41,12 @@ Suggestions are welcome at [hello@apalevich.com](mailto:hello@apalevich.com)
 - [ ] Add task descriptions for context
 
 ## Past Releases
+
+**0.7 Cache optimization**
+- [x] Create cache for the reviews
+- [x] Implement system to track code updates
+- [x] Make recommendations more specific
+- [x] Improve IU
 
 **0.6 Design improvements**
 - [x] Integrate UI library
