@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 
 const PieChart = ({ value }) => {
-    const total = 158; /* 2π × 25 */
+    const total = 157; /* 2π × 25 */
     const fillValue = ((value * total) / 100);
     const pieRef = useRef(null);
 

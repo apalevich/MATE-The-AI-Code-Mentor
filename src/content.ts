@@ -19,6 +19,14 @@ detectUrlChange.on('change', () => {
         },
         extensionId: chrome.runtime.id
       });
+    } else {
+      sendToBackground({
+        name: "review",
+        body: {
+          error: "Element with selector '#read-only-cursor-text-area' not found."
+        },
+        extensionId: chrome.runtime.id
+      });
     }
   }, 1000);
   return false

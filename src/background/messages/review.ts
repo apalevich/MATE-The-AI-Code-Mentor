@@ -23,6 +23,11 @@ const handler: PlasmoMessaging.MessageHandler = async (req, _res) => {
 
   let review = await getCachedReview(previousReviews, hash);
   
+  if ('error' in req.body) {
+    await storage.set('currentReview', { error: {message: req.body.error} });
+    return;
+  }
+
   if (!review || !review.reqStatus) {
     console.log('Cached review not found, making request')
     const generatedReview = await service.getReview(req.body.content);
