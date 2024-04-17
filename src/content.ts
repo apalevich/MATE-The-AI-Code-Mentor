@@ -12,7 +12,7 @@ detectUrlChange.on('change', () => {
     sendToBackground({
       name: "review",
       body: {
-        error: "Please, visit GitHub.com to use MATE"
+        error: {message: "Please, visit GitHub.com to use MATE"}
       },
       extensionId: chrome.runtime.id
     });
@@ -25,7 +25,7 @@ detectUrlChange.on('change', () => {
       sendToBackground({
         name: "review",
         body: {
-          error: "Code not found. Please, open any file in a repository with code to use MATE"
+          error: {message: "Code not found. Please, open any file in a repository with code to use MATE"}
         },
         extensionId: chrome.runtime.id
       });
