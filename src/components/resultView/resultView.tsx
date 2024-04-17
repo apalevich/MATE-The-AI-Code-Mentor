@@ -1,17 +1,5 @@
 import PieChart from "~components/piechart";
-
-type RecommendationObject = {
-    title: string;
-    description: string;
-};
-
-type ResultViewProps = {
-    overallScore: number | string;
-    shortestFeedback: string;
-    overallFeedback: string;
-    mustHaveRecommendations: RecommendationObject[];
-    niceToHaveRecommendations: RecommendationObject[];
-};
+import type { ResultViewProps } from "~types/types";
 
 const renderRecommendations = (recommendations, fillColor) => {
     return recommendations?.length ? recommendations.map((recommendation, index) => (
@@ -31,7 +19,7 @@ const renderRecommendations = (recommendations, fillColor) => {
     )) : null;
 };
 
-const ResultView = ({
+export const ResultView = ({
     overallScore,
     shortestFeedback,
     overallFeedback,
@@ -39,16 +27,19 @@ const ResultView = ({
     niceToHaveRecommendations
 }: ResultViewProps) => {
     return (
-      <div className="tw-py-16">
+      <div className="tw-py-6">
         <div className="tw-m-auto tw-px-6 tw-text-grey-600">
           <div className="tw-rounded-[4rem] tw-space-y-6 tw-flex tw-flex-col tw-justify-center">
-            <div className="tw-text-center">
+            <div className="tw-flex tw-items-end">
               <PieChart value={overallScore} />
+              <div className="tw-flex tw-flex-col">
+                <p className="tw-text-xl">{overallScore}%</p>
+                <h2 className="tw-text-5xl tw-font-bold tw-text-grey-900 tw-dark:text-white tw-basis-2">
+                  {shortestFeedback}
+                </h2>
+              </div>
             </div>
             <div>
-              <h2 className="tw-text-3xl tw-font-bold tw-text-grey-900 tw-dark:text-white">
-                {shortestFeedback}
-              </h2>
               <p className="tw-my-8 tw-text-grey-600 tw-dark:text-grey-300">
                 {overallFeedback}
               </p>
@@ -63,5 +54,3 @@ const ResultView = ({
       </div>
     )
   }
-
-  export default ResultView

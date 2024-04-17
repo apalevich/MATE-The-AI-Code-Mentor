@@ -1,15 +1,6 @@
 .circle {
-    width: 10px; height: 10px;
-    background: blueviolet;
-    margin: 5px 10px;
-    border-radius: 50%;
     transform-origin: top center;
     animation: spin 1s linear infinite;
-}
-
-.row {
-    display: flex;
-    flex: 0 1 100%;
 }
 
 .row:nth-child(1) .circle {animation-delay: 100ms;} /* = 0.1s */
