@@ -5,10 +5,10 @@ import Header from "~components/header";
 import Footer from "~components/footer";
 import {ResultView} from "~components/resultView";
 import {ErrorView} from "~components/errorView";
-import type { ReviewType } from "~types/types";
+import type { ReviewType, ErrorType } from "~types/types";
 
 const getCurrentView = () => {
-  const [currentReview] = useStorage<ReviewType | { error: object }>("currentReview");
+  const [currentReview] = useStorage<ReviewType | { error: ErrorType }>("currentReview");
 
   if (!currentReview) {
     return <LoadingAnimation />;
@@ -20,8 +20,6 @@ const getCurrentView = () => {
 };
 
 const GitHubCodeAnalyzer = () => {
-  const [currentReview] = useStorage<ReviewType>("currentReview");
-
   return (
     <div className="tw-w-screen tw-flex tw-flex-col tw-justify-between tw-bg-bg-primary">
       <Header />
@@ -33,4 +31,8 @@ const GitHubCodeAnalyzer = () => {
   );
 };
 
-export default GitHubCodeAnalyzer;
+function IndexSidePanel() {
+  return GitHubCodeAnalyzer()
+}
+
+export default IndexSidePanel

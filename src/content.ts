@@ -7,6 +7,23 @@ export const config: PlasmoCSConfig = {
   all_frames: true,
 };
 
+const openSidepanel = () => {
+  sendToBackground({
+    name: "openSidepanel",
+    extensionId: chrome.runtime.id
+  });
+};
+
+var buttonContainer = document.querySelector('.SegmentedControl__SegmentedControlList-sc-1rzig82-0.huxtnT');
+if (buttonContainer) {
+  const div = document.createElement('div');
+  div.textContent = 'Click me!';
+  div.style.cursor = 'pointer';
+  div.addEventListener('click', openSidepanel);
+  buttonContainer.appendChild(div);
+}
+
+
 detectUrlChange.on('change', () => {
   if (document.location.host !== 'github.com') {
     sendToBackground({
