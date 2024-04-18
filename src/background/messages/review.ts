@@ -46,8 +46,3 @@ const handler: PlasmoMessaging.MessageHandler = async (req, _res) => {
 }
  
 export default handler
-
-// chrome.tabs.onActivated.addListener(async (activeInfo) => {
-//   const activeTab = await chrome.tabs.get(activeInfo.tabId);
-//   console.log("User switched to a tab:", activeTab);
-// });
