@@ -3,7 +3,7 @@ import { sendToBackground } from "@plasmohq/messaging";
 import detectUrlChange from 'detect-url-change';
 
 export const config: PlasmoCSConfig = {
-  matches: ["<all_urls>"],
+  matches: ["https://*.github.com/*"],
   all_frames: true,
 };
 
@@ -14,21 +14,22 @@ const openSidepanel = () => {
   });
 };
 
-var buttonContainer = document.querySelector('.react-blob-header-edit-and-raw-actions')
 
-if (buttonContainer) {
-  const div = document.createElement('div');
-
-  const element = `<button class="Button--primary Button--small Button" type="button">AI Code Review</button>`;
-
-  div.innerHTML = element;
-  div.style.cursor = 'pointer';
-  div.addEventListener('click', openSidepanel);
-  buttonContainer.prepend(div);
-}
 
 
 detectUrlChange.on('change', () => {
+  var buttonContainer = document.querySelector('.react-blob-header-edit-and-raw-actions');
+  if (buttonContainer) {
+    const div = document.createElement('div');
+    const element = `<button class="Button--primary Button--small Button" type="button">AI Code Review</button>`;
+
+    div.innerHTML = element;
+    div.style.cursor = 'pointer';
+    div.addEventListener('click', openSidepanel);
+    buttonContainer.prepend(div);
+  }
+
+
   if (document.location.host !== 'github.com') {
     sendToBackground({
       name: "review",

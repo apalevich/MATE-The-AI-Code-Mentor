@@ -1,8 +1,10 @@
 {
   "name": "mate-the-ai-code-mentor",
+  "displayName": "MATE: AI Code Review",
   "version": "0.9.0",
   "description": "Get the best code review possible with a finely-tuned GPT",
   "author": "hello@apalevich.com",
+  "homepage": "https://apalevich.com/mate",
   "scripts": {
     "dev": "plasmo dev",
     "build": "plasmo build",
@@ -31,7 +33,7 @@
   },
   "manifest": {
     "host_permissions": [
-      "https://github.com/*"
+      "https://*/*"
     ]
   }
 }
