@@ -9,7 +9,7 @@ const service = new MateService();
  
 const getCachedReview = async (previousReviews, id) => {
   const cachedReview = previousReviews.find(r => r.id === id);
-  console.log('Found cached review');
+  console.log('Cached review:', cachedReview);
   return cachedReview;
 }
 
@@ -24,7 +24,7 @@ const handler: PlasmoMessaging.MessageHandler = async (req, _res) => {
   let review = await getCachedReview(previousReviews, hash);
   
   if ('error' in req.body) {
-    await storage.set('currentReview', { error: {message: req.body.error} });
+    await storage.set('currentReview', { error: req.body.error });
     return;
   }
 
@@ -46,3 +46,8 @@ const handler: PlasmoMessaging.MessageHandler = async (req, _res) => {
 }
  
 export default handler
+
+// chrome.tabs.onActivated.addListener(async (activeInfo) => {
+//   const activeTab = await chrome.tabs.get(activeInfo.tabId);
+//   console.log("User switched to a tab:", activeTab);
+// });

@@ -1,6 +1,6 @@
 {
   "name": "mate-the-ai-code-mentor",
-  "version": "0.7.0",
+  "version": "0.9.0",
   "description": "Get the best code review possible with a finely-tuned GPT",
   "author": "hello@apalevich.com",
   "scripts": {
@@ -31,7 +31,7 @@
   },
   "manifest": {
     "host_permissions": [
-      "http*://github.com/*"
+      "https://github.com/*"
     ]
   }
 }
