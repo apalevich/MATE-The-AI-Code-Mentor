@@ -14,13 +14,17 @@ const openSidepanel = () => {
   });
 };
 
-var buttonContainer = document.querySelector('.SegmentedControl__SegmentedControlList-sc-1rzig82-0.huxtnT');
+var buttonContainer = document.querySelector('.react-blob-header-edit-and-raw-actions')
+
 if (buttonContainer) {
   const div = document.createElement('div');
-  div.textContent = 'Click me!';
+
+  const element = `<button class="Button--primary Button--small Button" type="button">AI Code Review</button>`;
+
+  div.innerHTML = element;
   div.style.cursor = 'pointer';
   div.addEventListener('click', openSidepanel);
-  buttonContainer.appendChild(div);
+  buttonContainer.prepend(div);
 }
 
 

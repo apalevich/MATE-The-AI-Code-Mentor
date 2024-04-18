@@ -21,7 +21,7 @@ const getCurrentView = () => {
 
 const GitHubCodeAnalyzer = () => {
   return (
-    <div className="tw-w-screen tw-flex tw-flex-col tw-justify-between tw-bg-bg-primary">
+    <div className="tw-h-full tw-flex tw-flex-col tw-justify-between">
       <Header />
       <div className="tw-mx-auto tw-text-font">
         {getCurrentView()}
