@@ -27,7 +27,7 @@ Suggestions are welcome at [hello@apalevich.com](mailto:hello@apalevich.com)
 **0.9 "The hacker" release**
 - [ ] Implement breakable API handler
 - [ ] Write an instruction
-- [ ] Make the repo available?
+- [ ] ~~Make the repo available?~~
 
 **1.0 Auth for users**
 - [ ] Integrate BaaS solution
