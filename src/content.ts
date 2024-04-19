@@ -14,9 +14,6 @@ const openSidepanel = () => {
   });
 };
 
-
-
-
 detectUrlChange.on('change', () => {
   var buttonContainer = document.querySelector('.react-blob-header-edit-and-raw-actions');
   if (buttonContainer) {
