@@ -62,7 +62,7 @@ Suggestions are welcome at [hello@apalevich.com](mailto:hello@apalevich.com)
 - [x] Use Parcel as a bundler
 - [x] Update files structure
 - [x] Improve architecture
-- [ ] Make the repo public accessible?
+- [ ] ~~Make the repo public accessible?~~
 
 **0.3 (beta) Features for collecting feedback**
 
@@ -77,7 +77,7 @@ Suggestions are welcome at [hello@apalevich.com](mailto:hello@apalevich.com)
 - [x] Return results to popup
 
 **0.1 Prototype**
-- [ ] In Chrome popup loads without errors
+- [x] In Chrome popup loads without errors
 
 # Credits
 
