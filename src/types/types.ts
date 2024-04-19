@@ -13,8 +13,9 @@ type ResultViewProps = {
 
 type ReviewType = {
   id: string,
-  result: ResultViewProps,
   reqStatus?: boolean
+  result?: ResultViewProps,
+  error?: ErrorType
 } | undefined;
 
 type ErrorType = {
