@@ -11,7 +11,7 @@ export const ErrorView = ({icon, message, button}: ErrorType) => {
             }
             
             
-            <h3 className='tw-text-md tw-font-semibold'>{message}</h3>
+            <h3 className='tw-text-md tw-font-semibold tw-text-center'>{message}</h3>
 
             {
                 button

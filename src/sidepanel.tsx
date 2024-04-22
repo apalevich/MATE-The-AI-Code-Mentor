@@ -8,14 +8,15 @@ import {ErrorView} from "~components/errorView";
 import type { ReviewType, ErrorType } from "~types/types";
 
 const getCurrentView = () => {
-  const [currentReview] = useStorage<ReviewType | { error: ErrorType }>("currentReview");
+  const [currentReview] = useStorage("currentReview");
 
   if (!currentReview) {
     return <LoadingAnimation />;
-  } else if ('error' in currentReview) {
+  } else if (currentReview.error) {
     return <ErrorView {...currentReview.error} />;
   } else {
-    return <ResultView {...currentReview.result} />;
+    const serializedResult = JSON.parse(currentReview.result);
+    return <ResultView {...serializedResult} />;
   }
 };
 

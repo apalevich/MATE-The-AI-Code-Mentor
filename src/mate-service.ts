@@ -28,7 +28,7 @@ export default class MateService {
         }
         return { ok: true, result: this._getExtractedResult(responseData) };
       } catch (error) {
-        return { ok: false, error: {message: "Error: " + error.message} };
+        return { ok: false, error: {message: "Failed to contact the remote server. Please check your internet connection"} };
       }
     }
 
