@@ -3,12 +3,9 @@
 @tailwind utilities;
 
 @layer {
-    /* body {
-        width: 400px;
-        height: auto;
-        min-height: 100%;
-        /* max-height: 1440px;
-    } */
+    body {
+        @apply tw-font-mono 
+    }
     html, body, #__plasmo {
         height: 100%;
     }
