@@ -28,18 +28,18 @@ const generateReview = async (payload: string, hash: string) => {
 
 const handler: PlasmoMessaging.MessageHandler = async (req, _res) => {
   storage.remove('currentReview');
+  
+  if ('error' in req.body) {
+    await storage.set('currentReview', { error: {message: req.body.error} });
+    
+    return;
+  }
 
   const sourceCode = req.body.content;
   const hash = md5(sourceCode);
 
   const previousReviews: ReviewType[] = await storage.get('previousReviews') || [];
-
   let currentReview = await getCachedReview(previousReviews, hash);
-  
-  if ('error' in req.body) {
-    await storage.set('currentReview', { error: {message: req.body.error} });
-    return;
-  }
 
   if (!currentReview || !currentReview.reqStatus) {
     const result = await generateReview(req.body.content, hash);
