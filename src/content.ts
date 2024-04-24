@@ -7,25 +7,8 @@ export const config: PlasmoCSConfig = {
   all_frames: true,
 };
 
-const openSidepanel = () => {
-  sendToBackground({
-    name: "openSidepanel",
-    extensionId: chrome.runtime.id
-  });
-};
-
 detectUrlChange.on('change', () => {
-  var buttonContainer = document.querySelector('.react-blob-header-edit-and-raw-actions');
-  if (buttonContainer) {
-    const div = document.createElement('div');
-    const element = `<button class="Button--primary Button--small Button" type="button">AI Code Review</button>`;
-
-    div.innerHTML = element;
-    div.style.cursor = 'pointer';
-    div.addEventListener('click', openSidepanel);
-    buttonContainer.prepend(div);
-  }
-
+  createButton();
 
   if (document.location.host !== 'github.com') {
     sendToBackground({
@@ -61,3 +44,26 @@ detectUrlChange.on('change', () => {
   }, 1000);
   return false
 })
+
+function createButton() {
+  var container = document.querySelector('.react-blob-header-edit-and-raw-actions');
+  if (container && !container.querySelector('#mate-extension-button')) {
+    // console.log('creating button...');
+    const div = document.createElement('div');
+    const element = `<button class="Button--primary Button--small Button" type="button" id="mate-extension-button">AI Code Review</button>`;
+    const openSidepanel = () => {
+      sendToBackground({
+        name: "openSidepanel",
+        extensionId: chrome.runtime.id
+      });
+    };
+    
+    div.innerHTML = element;
+    div.style.cursor = 'pointer';
+    div.addEventListener('click', openSidepanel);
+    container.prepend(div);
+  } else {
+    // console.log('no container');
+    setTimeout(createButton, 100)
+  }
+}
