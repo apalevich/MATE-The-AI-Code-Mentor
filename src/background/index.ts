@@ -1,4 +1,4 @@
-chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: false })
+chrome.sidePanel?.setPanelBehavior({ openPanelOnActionClick: false })
 
 chrome.tabs.onUpdated.addListener(async (tabId, _, tab) => {
     if (tab.url?.startsWith('https://github.com') && tab.url.includes('blob')) {
