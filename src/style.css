@@ -4,8 +4,9 @@
 
 @layer {
     body {
-        width: 400px;
-        height: auto;
-        max-height: 1440px;
+        @apply tw-font-mono 
+    }
+    html, body, #__plasmo {
+        height: 100%;
     }
 }

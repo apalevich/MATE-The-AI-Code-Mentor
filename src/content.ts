@@ -3,16 +3,18 @@ import { sendToBackground } from "@plasmohq/messaging";
 import detectUrlChange from 'detect-url-change';
 
 export const config: PlasmoCSConfig = {
-  matches: ["<all_urls>"],
+  matches: ["https://*.github.com/*"],
   all_frames: true,
 };
 
 detectUrlChange.on('change', () => {
+  createButton();
+
   if (document.location.host !== 'github.com') {
     sendToBackground({
       name: "review",
       body: {
-        error: "Please, visit GitHub.com to use MATE"
+        error: {message: "Please, visit GitHub.com to use MATE"}
       },
       extensionId: chrome.runtime.id
     });
@@ -25,7 +27,7 @@ detectUrlChange.on('change', () => {
       sendToBackground({
         name: "review",
         body: {
-          error: "Code not found. Please, open any file in a repository with code to use MATE"
+          error: {message: "Code not found. Please, open any file in a repository with code to use MATE"}
         },
         extensionId: chrome.runtime.id
       });
@@ -42,3 +44,26 @@ detectUrlChange.on('change', () => {
   }, 1000);
   return false
 })
+
+function createButton() {
+  var container = document.querySelector('.react-blob-header-edit-and-raw-actions');
+  if (container && !container.querySelector('#mate-extension-button')) {
+    // console.log('creating button...');
+    const div = document.createElement('div');
+    const element = `<button class="Button--primary Button--small Button" type="button" id="mate-extension-button">AI Code Review</button>`;
+    const openSidepanel = () => {
+      sendToBackground({
+        name: "openSidepanel",
+        extensionId: chrome.runtime.id
+      });
+    };
+    
+    div.innerHTML = element;
+    div.style.cursor = 'pointer';
+    div.addEventListener('click', openSidepanel);
+    container.prepend(div);
+  } else {
+    // console.log('no container');
+    setTimeout(createButton, 100)
+  }
+}

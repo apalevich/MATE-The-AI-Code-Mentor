@@ -13,8 +13,18 @@ type ResultViewProps = {
 
 type ReviewType = {
   id: string,
-  result: ResultViewProps,
   reqStatus?: boolean
+  result?: ResultViewProps,
+  error?: ErrorType
 } | undefined;
 
-export type {ResultViewProps, ReviewType};
+type ErrorType = {
+  icon?: string, // Emoji
+  message?: string,
+  button?: {
+    url: string,
+    text: string,
+  }
+};
+
+export type {ResultViewProps, ReviewType, ErrorType};

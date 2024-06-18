@@ -1,8 +1,10 @@
 {
   "name": "mate-the-ai-code-mentor",
-  "version": "0.7.0",
+  "displayName": "MATE: AI Code Review",
+  "version": "0.9.0",
   "description": "Get the best code review possible with a finely-tuned GPT",
   "author": "hello@apalevich.com",
+  "homepage": "https://apalevich.com/mate",
   "scripts": {
     "dev": "plasmo dev",
     "build": "plasmo build",
@@ -14,7 +16,7 @@
     "axios": "^1.6.2",
     "blueimp-md5": "^2.19.0",
     "detect-url-change": "^1.0.2",
-    "plasmo": "0.85.2",
+    "plasmo": "0.86.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "tailwindcss": "3.3.5"
@@ -32,6 +34,11 @@
   "manifest": {
     "host_permissions": [
       "https://*/*"
-    ]
+    ],
+    "browser_specific_settings": {
+      "gecko": {
+        "id": "mate@apalevich.com"
+      }
+    }
   }
 }
