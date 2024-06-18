@@ -24,11 +24,6 @@ Suggestions are welcome at [hello@apalevich.com](mailto:hello@apalevich.com)
 
 # Coming updates
 
-**0.9 "The hacker" release**
-- [ ] Implement breakable API handler
-- [ ] Write an instruction
-- [ ] ~~Make the repo available?~~
-
 **1.0 Auth for users**
 - [ ] Integrate BaaS solution
 - [ ] Develop login page
@@ -41,6 +36,11 @@ Suggestions are welcome at [hello@apalevich.com](mailto:hello@apalevich.com)
 - [ ] Add task descriptions for context
 
 ## Past Releases
+
+**0.9 "The hacker" release**
+- [x] Implement breakable API handler
+- [x] Write an instruction
+- [ ] ~~Make the repo available?~~
 
 **0.7 Cache optimization**
 - [x] Create cache for the reviews
