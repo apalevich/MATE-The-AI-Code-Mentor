@@ -10,6 +10,13 @@ import {ErrorView} from "~components/errorView";
 
 const getCurrentView = () => {
   const [currentReview] = useStorage("currentReview");
+  const [user] = useStorage<User>("user");
+
+  if (!user && !user?.user_metadata?.preferred_username) {
+    return (
+      <div>LOG IN PLEASE!</div>
+    )
+  }
 
   if (!currentReview) {
     return <LoadingAnimation />;
@@ -21,24 +28,14 @@ const getCurrentView = () => {
   }
 };
 
-const getUserName = (): string => {
-  const [user] = useStorage<User>("user");
-
-  if (user && user.user_metadata.preferred_username) {
-    return user.user_metadata.preferred_username
-  }
-  console.log('user\' name not found!', user);
-  return 'Unknown';
-}
-
 const GitHubCodeAnalyzer = () => {
   return (
     <div className="tw-h-full tw-flex tw-flex-col tw-justify-between">
       <Header />
       <div className="tw-mx-auto tw-text-font">
-        {getCurrentView()}
+            {getCurrentView()}
       </div>
-      <Footer username={getUserName()} />
+      <Footer />
     </div>
   );
 };
