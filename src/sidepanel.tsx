@@ -11,21 +11,20 @@ import {ErrorView} from "~components/errorView";
 const getCurrentView = () => {
   const [currentReview] = useStorage("currentReview");
   const [user] = useStorage<User>("user");
-
   if (!user && !user?.user_metadata?.preferred_username) {
     return (
       <div>LOG IN PLEASE!</div>
     )
   }
-
   if (!currentReview) {
     return <LoadingAnimation />;
-  } else if (currentReview.error) {
-    return <ErrorView {...currentReview.error} />;
-  } else {
-    const serializedResult = JSON.parse(currentReview.result);
-    return <ResultView {...serializedResult} />;
   }
+  if (currentReview.error) {
+    return <ErrorView {...currentReview.error} />;
+  }
+
+  const serializedResult = JSON.parse(currentReview.result);
+  return <ResultView {...serializedResult} />;
 };
 
 const GitHubCodeAnalyzer = () => {
