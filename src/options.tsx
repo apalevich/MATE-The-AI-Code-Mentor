@@ -1,18 +1,12 @@
 import type { Provider, User } from "@supabase/supabase-js"
 import { useEffect } from "react"
  
-import { Storage } from "@plasmohq/storage"
 import { useStorage } from "@plasmohq/storage/hook"
  
 import { supabase } from "~core/supabase"
  
 function IndexOptions() {
-  const [user, setUser] = useStorage<User>({
-    key: "user",
-    instance: new Storage({
-      area: "local"
-    })
-  });
+  const [user, setUser] = useStorage<User>("user")
  
   useEffect(() => {
     async function init() {
