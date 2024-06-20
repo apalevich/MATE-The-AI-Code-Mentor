@@ -12,7 +12,8 @@ const Footer = () => {
       {
         username && <div className="tw-text-grey-500/50 tw-text-center tw-text-xs">
           Logged as
-          <span className="tw-font-semibold"> {username}</span>
+          <span className="tw-font-semibold"> {username}</span>. 
+          <span className='hover:tw-cursor-pointer' onClick={() => {chrome.runtime.openOptionsPage();}}> Want to logout?</span>
         </div>
       }
       <div className="tw-flex tw-justify-center tw-gap-1">

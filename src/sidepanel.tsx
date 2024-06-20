@@ -7,7 +7,7 @@ import Header from "~components/header";
 import Footer from "~components/footer";
 import { ResultView } from "~components/resultView";
 import { ErrorView } from "~components/errorView";
-import { LoginView } from "~components/loginView/loginView";
+import { LoginView } from "~components/loginView";
 
 const getCurrentView = () => {
   const [currentReview] = useStorage("currentReview");
