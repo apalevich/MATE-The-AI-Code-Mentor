@@ -25,11 +25,13 @@ Suggestions are welcome at [hello@apalevich.com](mailto:hello@apalevich.com)
 # Coming updates
 
 **1.0 Auth for users**
-- [ ] Integrate BaaS solution
+- [ ] Integrate OAuth solution
 - [ ] Develop login page
 - [ ] Route auth/unauth user
 
-**1.x Stripe integration**
+**1.x AccountManagement integration**
+- [ ] Plans
+- [ ] Options page
 
 **1.x Support for Pull Requests**
 - [ ] Improve filtering of GitHub pages

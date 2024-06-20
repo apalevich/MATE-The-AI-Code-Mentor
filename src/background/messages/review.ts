@@ -6,8 +6,17 @@ import type { ErrorType, ReviewType } from "~types/types";
 
 const storage = new Storage();
 const service = new MateService();
+
+storage.watch({
+  currentReview: (c: any) => {
+    console.log('currentReview: ', c)
+  },
+  user: (c: any) => {
+    console.log("user", c)
+  },
+});
  
-const getCachedReview = async (previousReviews: ReviewType[], id) => {
+const getCachedReview = async (previousReviews: ReviewType[], id: string) => {
   const cachedReview = previousReviews.find((r: ReviewType) => r.id === id);
   console.log('Cached currentReview:', cachedReview);
   return cachedReview;

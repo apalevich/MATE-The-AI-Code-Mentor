@@ -4,7 +4,7 @@ import type { ResultViewProps } from "~types/types";
 const renderRecommendations = (recommendations, fillColor) => {
     return recommendations?.length ? recommendations.map((recommendation, index) => (
       <div key={index} className="tw-mt-8 tw-flex tw-gap-4">
-        <div className="tw-w-12 tw-h-12 tw-flex tw-gap-4 tw-rounded-full tw-bg-indigo-100 tw-dark:bg-indigo-900/20">
+        <div className="tw-w-12 tw-h-12 tw-flex tw-gap-4 tw-rounded-full">
           <div className="tw-w-6 tw-h-6 tw-m-auto">
             <svg viewBox="0 0 8 8" fill={fillColor} xmlns="http://www.w3.org/2000/svg" className="tw-w-6 tw-h-6 tw-m-auto tw-text-red-500 tw-dark:text-red-400">
               <circle cx="4" cy="4" r="4"/>
