@@ -1,9 +1,8 @@
 import type { Provider, User } from "@supabase/supabase-js"
 import { useEffect } from "react"
- 
 import { useStorage } from "@plasmohq/storage/hook"
- 
 import { supabase } from "~core/supabase"
+import '~style.css';
  
 function IndexOptions() {
   const [user, setUser] = useStorage<User>("user")

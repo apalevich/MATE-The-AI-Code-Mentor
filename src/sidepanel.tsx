@@ -5,16 +5,15 @@ import "~style.css";
 import LoadingAnimation from "~components/loader";
 import Header from "~components/header";
 import Footer from "~components/footer";
-import {ResultView} from "~components/resultView";
-import {ErrorView} from "~components/errorView";
+import { ResultView } from "~components/resultView";
+import { ErrorView } from "~components/errorView";
+import { LoginView } from "~components/loginView/loginView";
 
 const getCurrentView = () => {
   const [currentReview] = useStorage("currentReview");
   const [user] = useStorage<User>("user");
   if (!user && !user?.user_metadata?.preferred_username) {
-    return (
-      <div>LOG IN PLEASE!</div>
-    )
+    return <LoginView />
   }
   if (!currentReview) {
     return <LoadingAnimation />;
@@ -27,20 +26,16 @@ const getCurrentView = () => {
   return <ResultView {...serializedResult} />;
 };
 
-const GitHubCodeAnalyzer = () => {
+function IndexSidePanel() {
   return (
     <div className="tw-h-full tw-flex tw-flex-col tw-justify-between">
       <Header />
       <div className="tw-mx-auto tw-text-font">
-            {getCurrentView()}
+        { getCurrentView() }
       </div>
       <Footer />
     </div>
   );
 };
-
-function IndexSidePanel() {
-  return GitHubCodeAnalyzer()
-}
 
 export default IndexSidePanel
