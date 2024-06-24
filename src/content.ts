@@ -50,7 +50,7 @@ function createButton() {
   if (container && !container.querySelector('#mate-extension-button')) {
     // console.log('creating button...');
     const div = document.createElement('div');
-    const element = `<button class="Button--primary Button--small Button" type="button" id="mate-extension-button">AI Code Review</button>`;
+    const element = `<button class="Button--primary Button--small Button" style="text-wrap: nowrap;" type="button" id="mate-extension-button">AI Code Review</button>`;
     const openSidepanel = () => {
       sendToBackground({
         name: "openSidepanel",
