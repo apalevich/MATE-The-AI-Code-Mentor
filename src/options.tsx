@@ -60,6 +60,13 @@ function IndexOptions() {
             <button
               className="tw-bg-blue-600 tw-text-white tw-w-full tw-py-2 tw-px-5 tw-block tw-h-10 tw-rounded-full tw-mt-8 tw-transition-all tw-duration-500 tw-ease-in-out tw-border-none tw-uppercase hover:tw-bg-blue-700 hover:tw-shadow-lg hover:tw-cursor-pointer focus:tw-outline-none"
               onClick={() => {
+                window.close();
+              }}>
+              Close Tab
+            </button>
+            <button
+              className="tw-bg-white tw-text-blue-600 tw-border-2 tw-border-blue-600 tw-w-full tw-py-2 tw-px-5 tw-block tw-h-10 tw-rounded-full tw-mt-8 tw-transition-all tw-duration-500 tw-ease-in-out tw-border-none tw-uppercase hover:tw-bg-blue-700 hover:tw-shadow-lg hover:tw-cursor-pointer focus:tw-outline-none"
+              onClick={() => {
                 supabase.auth.signOut()
                 setUser(null)
               }}>
