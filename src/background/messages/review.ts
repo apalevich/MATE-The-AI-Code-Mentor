@@ -39,7 +39,7 @@ const handler: PlasmoMessaging.MessageHandler = async (req, _res) => {
   storage.remove('currentReview');
   
   if ('error' in req.body) {
-    await storage.set('currentReview', { error: {message: req.body.error} });
+    await storage.set('currentReview', req.body);
     
     return;
   }
