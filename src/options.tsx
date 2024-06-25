@@ -43,7 +43,7 @@ function IndexOptions() {
       <h2 className="tw-pl-0 tw-pb-1 tw-border-b-2 tw-border-blue-600 tw-text-2xl tw-uppercase tw-inline-block tw-font-thin">Sign In</h2>
       <button
         className="tw-bg-blue-600 tw-text-white tw-w-full tw-py-2 tw-px-5 tw-block tw-h-10 tw-rounded-full tw-mt-8 tw-transition-all tw-duration-500 tw-ease-in-out tw-border-none tw-uppercase hover:tw-bg-blue-700 hover:tw-shadow-lg hover:tw-cursor-pointer focus:tw-outline-none"
-        onClick={() => signInWithOAuth('github')}
+        onClick={(e) => {e.currentTarget.disabled = true;signInWithOAuth('github')}}
       >
         Sign In with GitHub
       </button>

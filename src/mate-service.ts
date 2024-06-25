@@ -40,7 +40,7 @@ export default class MateService {
       }
     }
 
-    _getExtractedResult(responseData) {
+    _getExtractedResult(responseData): object {
       return responseData.choices[0].message.content
     }
 
