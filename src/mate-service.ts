@@ -25,7 +25,7 @@ export default class MateService {
       try {
         const response: Response = await fetch(this.apiUrl, {
           method: "POST",
-          body: JSON.stringify({ content: parsedCode }),
+          body: JSON.stringify({ content: parsedCode, filename, userId }),
           headers: { "Content-Type": "application/json" }
         });
         
