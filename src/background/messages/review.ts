@@ -26,7 +26,6 @@ const getCachedReview = async (previousReviews: ReviewType[], id: string) => {
 
 const generateReview = async (payload: RequestType, hash: string) => {
   console.log(`Current review is not found, requesting...`);
-  console.log('payload', payload);
   const generatedReview = await service.getReview(payload);
   const { ok, result, error } = generatedReview;
 
@@ -55,10 +54,11 @@ const handler: PlasmoMessaging.MessageHandler = async (req, _res) => {
 
   if (!currentReview || !currentReview.reqStatus) {
     const user = await storage.get('user');
-    const payload = {...req.body, userId: await user.id };
+    const userId = user.id;
+    const payload = {...req.body, userId };
     const result = await generateReview(payload, hash);
     storage.set('currentReview', result);
-  };
+  }
 }
  
 export default handler
