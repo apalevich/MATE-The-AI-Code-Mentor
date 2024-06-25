@@ -1,3 +1,9 @@
+type RequestType = {
+  filename: string,
+  parsedCode: string,
+  userId: string | number,
+};
+
 type RecommendationObject = {
   title: string;
   description: string;
@@ -27,4 +33,9 @@ type ErrorType = {
   }
 };
 
-export type {ResultViewProps, ReviewType, ErrorType};
+export type {
+  RequestType,
+  ResultViewProps,
+  ReviewType,
+  ErrorType
+};

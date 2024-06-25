@@ -2,19 +2,21 @@ import type { PlasmoMessaging } from "@plasmohq/messaging";
 import { Storage } from "@plasmohq/storage";
 import MateService from "src/mate-service";
 import md5 from "blueimp-md5";
-import type { ErrorType, ReviewType } from "~types/types";
+import type { RequestType, ReviewType } from "~types/types";
 
 const storage = new Storage();
 const service = new MateService();
 
-storage.watch({
-  currentReview: (c: any) => {
-    console.log('currentReview: ', c)
-  },
-  user: (c: any) => {
-    console.log("user", c)
-  },
-});
+if (process.env.NODE_ENV === 'development') {
+  storage.watch({
+    currentReview: (c: any) => {
+      console.log('currentReview: ', c)
+    },
+    user: (c: any) => {
+      console.log("user", c)
+    },
+  });
+}
  
 const getCachedReview = async (previousReviews: ReviewType[], id: string) => {
   const cachedReview = previousReviews.find((r: ReviewType) => r.id === id);
@@ -22,8 +24,9 @@ const getCachedReview = async (previousReviews: ReviewType[], id: string) => {
   return cachedReview;
 }
 
-const generateReview = async (payload: string, hash: string) => {
-  console.log(`Current review is not found, requesting...`)
+const generateReview = async (payload: RequestType, hash: string) => {
+  console.log(`Current review is not found, requesting...`);
+  console.log('payload', payload);
   const generatedReview = await service.getReview(payload);
   const { ok, result, error } = generatedReview;
 
@@ -51,7 +54,9 @@ const handler: PlasmoMessaging.MessageHandler = async (req, _res) => {
   let currentReview = await getCachedReview(previousReviews, hash);
 
   if (!currentReview || !currentReview.reqStatus) {
-    const result = await generateReview(req.body.content, hash);
+    const user = await storage.get('user');
+    const payload = {...req.body, userId: await user.id };
+    const result = await generateReview(payload, hash);
     storage.set('currentReview', result);
   };
 }

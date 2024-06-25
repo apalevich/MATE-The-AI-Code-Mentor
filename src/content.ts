@@ -1,4 +1,5 @@
 import type { PlasmoCSConfig } from "plasmo";
+
 import { sendToBackground } from "@plasmohq/messaging";
 import detectUrlChange from 'detect-url-change';
 
@@ -20,6 +21,7 @@ detectUrlChange.on('change', () => {
     });
     return false;
   }
+
   setTimeout(()=> {
     const parsedText = document.getElementById("read-only-cursor-text-area")?.textContent;
 
@@ -37,7 +39,8 @@ detectUrlChange.on('change', () => {
     sendToBackground({
       name: "review",
       body: {
-        content: parsedText
+        filename: location.pathname.split('/').pop() || '',
+        parsedCode: parsedText,
       },
       extensionId: chrome.runtime.id
     });
@@ -48,7 +51,6 @@ detectUrlChange.on('change', () => {
 function createButton() {
   var container = document.querySelector('.react-blob-header-edit-and-raw-actions');
   if (container && !container.querySelector('#mate-extension-button')) {
-    // console.log('creating button...');
     const div = document.createElement('div');
     const element = `<button class="Button--primary Button--small Button" style="text-wrap: nowrap;" type="button" id="mate-extension-button">AI Code Review</button>`;
     const openSidepanel = () => {
@@ -63,7 +65,6 @@ function createButton() {
     div.addEventListener('click', openSidepanel);
     container.prepend(div);
   } else {
-    // console.log('no container');
     setTimeout(createButton, 100)
   }
 }
