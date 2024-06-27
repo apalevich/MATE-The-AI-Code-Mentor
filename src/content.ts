@@ -19,6 +19,26 @@ const getUser = async(): Promise<User> => {
   return user;
 }
 
+const getReview = async (input: string) => {
+  getUser()
+  .then(user => {
+    if (user?.id) {  
+      const payload: RequestType = {
+        filename: location.pathname.split('/').pop() || '',
+        parsedCode: input,
+        user_id: user.id
+      };
+      sendToBackground({
+        name: "review",
+        body: payload,
+        extensionId: chrome.runtime.id
+      });
+    } else {
+      getReview(input);
+    };
+  });
+};
+
 detectUrlChange.on('change', async () => {
   if (document.location.host !== 'github.com') {
     const payload = {
@@ -56,30 +76,8 @@ detectUrlChange.on('change', async () => {
       });
       return false;
     }
+    getReview(parsedText);
     
-    getUser()
-    .then(user => {
-      if (user?.id) {  
-        const payload: RequestType = {
-          filename: location.pathname.split('/').pop() || '',
-          parsedCode: parsedText,
-          user_id: user.id
-        };
-        sendToBackground({
-          name: "review",
-          body: payload,
-          extensionId: chrome.runtime.id
-        });
-      } else {
-        sendToBackground({
-          name: "review",
-          body: {
-            error: {message: "User not found"}
-          },
-          extensionId: chrome.runtime.id
-        });
-      }
-    })
   }, 1000);
   return false
 })

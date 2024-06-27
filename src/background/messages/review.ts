@@ -20,36 +20,44 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const generateReview = async (payload: RequestType): Promise<ReviewType> => {
-  let response: ReviewType = await service.getReview(payload);
-  // if (typeof result === 'string') {
-  //   result = JSON.parse(result);
-  // }
+  const response: ReviewType = await service.getReview(payload);
+  if (typeof response.result === 'string') {
+    const parsedResult = JSON.parse(response.result);
+    return { ...response, result: parsedResult };
+  }
 
-  return response
+  return response;
 }
 
 const handler: PlasmoMessaging.MessageHandler = async (req, _res) => {
-  storage.remove('currentReview');
+  let currentReview:ReviewType = await storage.get('currentReview');
+  const { filename, parsedCode, user_id } = req.body;
+  
+  if (currentReview?.id == md5(parsedCode)) {
+    console.log('result is the same');
+    await storage.set('currentReview', currentReview);
+    return;
+  }
+  
+  await storage.remove('currentReview');
   
   if ('error' in req.body) {
     await storage.set('currentReview', req.body);
-    
     return;
   }
 
-  const { filename, parsedCode, user_id } = req.body;
-  const hash = md5(parsedCode);
-
-  let currentReview = await generateReview({user_id, parsedCode, filename, id: hash})
-
-  if (!currentReview || !currentReview.ok) {
-    if (!req.body.userId) {
-      console.error('User not found in request');
-      return;
-    }
-    const result = await generateReview(req.body);
-    storage.set('currentReview', result);
+  
+  if (!user_id) {
+    console.error('User not found in request');
+    return;
   }
+
+  const hash = md5(parsedCode);
+  const newReview = await generateReview({user_id, parsedCode, filename, id: hash});
+
+  console.log('result', newReview);
+  await storage.set('currentReview', newReview);
+  return;
 }
  
 export default handler

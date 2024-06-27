@@ -10,13 +10,8 @@ export default class MateService {
       this.apiUrl = `${this.domain}mate/analyze`;
     }
   
-    async getReview({
-      id,
-      user_id,
-      filename,
-      parsedCode,
-    }: RequestType): Promise<ReviewType> {  
-      for (const [key, value] of Object.entries(arguments[0])) {
+    async getReview(payload: RequestType): Promise<ReviewType> {  
+      for (const [key, value] of Object.entries(payload)) {
         if (!value) {
           console.error({ ok: false, result: { message: `Missed value: ${key}` } });
           return;
@@ -26,7 +21,7 @@ export default class MateService {
       try {
         const response: Response = await fetch(this.apiUrl, {
           method: "POST",
-          body: JSON.stringify(arguments[0]),
+          body: JSON.stringify(payload),
           headers: { "Content-Type": "application/json" }
         });
         
