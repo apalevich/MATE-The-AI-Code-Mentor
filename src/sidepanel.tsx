@@ -1,4 +1,5 @@
 import type { User } from "@supabase/supabase-js"
+import type { ReviewType } from "~types/types";
 
 import { useStorage } from "@plasmohq/storage/hook";
 import "~style.css";
@@ -10,8 +11,10 @@ import { ErrorView } from "~components/errorView";
 import { LoginView } from "~components/loginView";
 
 const getCurrentView = () => {
-  const [currentReview] = useStorage("currentReview");
+  const [currentReview] = useStorage<ReviewType>("currentReview");
   const [user] = useStorage<User>("user");
+  console.log('update:', user, currentReview)
+
   if (!user && !user?.user_metadata?.preferred_username) {
     return <LoginView />
   }
@@ -22,8 +25,7 @@ const getCurrentView = () => {
     return <ErrorView {...currentReview.error} />;
   }
 
-  const serializedResult = JSON.parse(currentReview.result);
-  return <ResultView {...serializedResult} />;
+  return <ResultView {...currentReview.result} />;
 };
 
 function IndexSidePanel() {

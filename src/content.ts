@@ -1,46 +1,86 @@
 import type { PlasmoCSConfig } from "plasmo";
+import type { ErrorType, RequestType } from "~types/types";
+import type { User } from "@supabase/supabase-js";
+import type { PlasmoMessaging } from "@plasmohq/messaging";
+
 import { sendToBackground } from "@plasmohq/messaging";
 import detectUrlChange from 'detect-url-change';
+import { Storage } from "@plasmohq/storage";
 
 export const config: PlasmoCSConfig = {
   matches: ["https://*.github.com/*"],
   all_frames: true,
 };
 
-detectUrlChange.on('change', () => {
-  createButton();
+const storage = new Storage()
 
+const getUser = async(): Promise<User> => {
+  const user = await storage.get<User>('user');
+  return user;
+}
+
+const getReview = async (input: string) => {
+  getUser()
+  .then(user => {
+    if (user?.id) {  
+      const payload: RequestType = {
+        filename: location.pathname.split('/').pop() || '',
+        parsedCode: input,
+        user_id: user.id
+      };
+      sendToBackground({
+        name: "review",
+        body: payload,
+        extensionId: chrome.runtime.id
+      });
+    } else {
+      getReview(input);
+    };
+  });
+};
+
+const createErrorPayload = (message: string, url: string, text: string): ErrorType => ({
+  message,
+  button: {
+    url,
+    text
+  }
+});
+
+detectUrlChange.on('change', async () => {
   if (document.location.host !== 'github.com') {
+    const payload = createErrorPayload(
+      "Please, visit GitHub.com to use MATE",
+      'https://github.com/facebook/react/blob/main/scripts/rollup/utils.js',
+      'Open example'
+    );
     sendToBackground({
-      name: "review",
-      body: {
-        error: {message: "Please, visit GitHub.com to use MATE"}
-      },
-      extensionId: chrome.runtime.id
+      name: 'review',
+      body: {ok: false, error: payload},
+      extensionId: process.env.CRX_IR
     });
     return false;
-  }
+  };
+
+  createButton();
   setTimeout(()=> {
     const parsedText = document.getElementById("read-only-cursor-text-area")?.textContent;
 
     if (!parsedText) {
+      const payload = createErrorPayload(
+        "Code not detected. Please, open any file in a repository with code and try again",
+        'https://github.com/facebook/react/blob/main/scripts/rollup/utils.js',
+        'Open example'
+      );
       sendToBackground({
         name: "review",
-        body: {
-          error: {message: "Code not found. Please, open any file in a repository with code to use MATE"}
-        },
+        body: {ok: false, error: payload},
         extensionId: chrome.runtime.id
       });
       return false;
     }
+    getReview(parsedText);
     
-    sendToBackground({
-      name: "review",
-      body: {
-        content: parsedText
-      },
-      extensionId: chrome.runtime.id
-    });
   }, 1000);
   return false
 })
@@ -48,9 +88,8 @@ detectUrlChange.on('change', () => {
 function createButton() {
   var container = document.querySelector('.react-blob-header-edit-and-raw-actions');
   if (container && !container.querySelector('#mate-extension-button')) {
-    // console.log('creating button...');
     const div = document.createElement('div');
-    const element = `<button class="Button--primary Button--small Button" type="button" id="mate-extension-button">AI Code Review</button>`;
+    const element = `<button class="Button--primary Button--small Button" style="text-wrap: nowrap;" type="button" id="mate-extension-button">AI Code Review</button>`;
     const openSidepanel = () => {
       sendToBackground({
         name: "openSidepanel",
@@ -63,7 +102,6 @@ function createButton() {
     div.addEventListener('click', openSidepanel);
     container.prepend(div);
   } else {
-    // console.log('no container');
     setTimeout(createButton, 100)
   }
 }

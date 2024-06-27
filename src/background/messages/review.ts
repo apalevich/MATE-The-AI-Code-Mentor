@@ -1,59 +1,63 @@
 import type { PlasmoMessaging } from "@plasmohq/messaging";
+import type { RequestType, ReviewType } from "~types/types";
+
 import { Storage } from "@plasmohq/storage";
 import MateService from "src/mate-service";
 import md5 from "blueimp-md5";
-import type { ErrorType, ReviewType } from "~types/types";
 
 const storage = new Storage();
 const service = new MateService();
 
-storage.watch({
-  currentReview: (c: any) => {
-    console.log('currentReview: ', c)
-  },
-  user: (c: any) => {
-    console.log("user", c)
-  },
-});
- 
-const getCachedReview = async (previousReviews: ReviewType[], id: string) => {
-  const cachedReview = previousReviews.find((r: ReviewType) => r.id === id);
-  console.log('Cached currentReview:', cachedReview);
-  return cachedReview;
+if (process.env.NODE_ENV === 'development') {
+  storage.watch({
+    currentReview: (c: any) => {
+      console.log('currentReview: ', c)
+    },
+    user: (c: any) => {
+      console.log("user", c)
+    },
+  });
 }
 
-const generateReview = async (payload: string, hash: string) => {
-  console.log(`Current review is not found, requesting...`)
-  const generatedReview = await service.getReview(payload);
-  const { ok, result, error } = generatedReview;
-
-  return {
-    id: hash,
-    reqStatus: ok,
-    result,
-    error
+const generateReview = async (payload: RequestType): Promise<ReviewType> => {
+  const response: ReviewType = await service.getReview(payload);
+  if (typeof response.result === 'string') {
+    const parsedResult = JSON.parse(response.result);
+    return { ...response, result: parsedResult };
   }
+
+  return response;
 }
 
 const handler: PlasmoMessaging.MessageHandler = async (req, _res) => {
-  storage.remove('currentReview');
+  let currentReview:ReviewType = await storage.get('currentReview');
+  const { filename, parsedCode, user_id } = req.body;
+  
+  if (currentReview?.id == md5(parsedCode)) {
+    console.log('result is the same');
+    await storage.set('currentReview', currentReview);
+    return;
+  }
+  
+  await storage.remove('currentReview');
   
   if ('error' in req.body) {
-    await storage.set('currentReview', { error: {message: req.body.error} });
-    
+    await storage.set('currentReview', req.body);
     return;
   }
 
-  const sourceCode = req.body.content;
-  const hash = md5(sourceCode);
+  
+  if (!user_id) {
+    console.error('User not found in request');
+    return;
+  }
 
-  const previousReviews: ReviewType[] = await storage.get('previousReviews') || [];
-  let currentReview = await getCachedReview(previousReviews, hash);
+  const hash = md5(parsedCode);
+  const newReview = await generateReview({user_id, parsedCode, filename, id: hash});
 
-  if (!currentReview || !currentReview.reqStatus) {
-    const result = await generateReview(req.body.content, hash);
-    storage.set('currentReview', result);
-  };
+  console.log('result', newReview);
+  await storage.set('currentReview', newReview);
+  return;
 }
  
 export default handler

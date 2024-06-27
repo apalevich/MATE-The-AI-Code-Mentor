@@ -4,10 +4,10 @@ import type { ErrorType } from "~types/types";
 
 const popupErrorData: ErrorType = {
     icon: '🤖',
-    message: `Oops! Looks like there's no popup here. Just hit the "AI Code Review" button on GitHub.com to get started. Happy coding!`,
+    message: `Oops! There's no popup here. Please go to GitHub.com and hit the "AI Code Review" button on a file to get started. Happy coding!`,
     button: {
-        url: 'https://github.com',
-        text: 'Open GitHub.com'
+        url: 'https://github.com/facebook/react/blob/main/scripts/rollup/utils.js',
+        text: 'Open example'
     }
 }
 

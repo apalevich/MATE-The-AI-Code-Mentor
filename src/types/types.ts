@@ -1,3 +1,10 @@
+type RequestType = {
+  id?: string,
+  user_id: string,
+  filename: string,
+  parsedCode: string,
+};
+
 type RecommendationObject = {
   title: string;
   description: string;
@@ -12,8 +19,8 @@ type ResultViewProps = {
 };
 
 type ReviewType = {
-  id: string,
-  reqStatus?: boolean
+  id?: string,
+  ok: boolean
   result?: ResultViewProps,
   error?: ErrorType
 } | undefined;
@@ -27,4 +34,9 @@ type ErrorType = {
   }
 };
 
-export type {ResultViewProps, ReviewType, ErrorType};
+export type {
+  RequestType,
+  ResultViewProps,
+  ReviewType,
+  ErrorType
+};

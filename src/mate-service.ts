@@ -1,4 +1,4 @@
-import type { ErrorType } from "~types/types";
+import type { RequestType ,ErrorType, ReviewType, ResultViewProps } from "~types/types";
 
 export default class MateService {
     private domain: string;
@@ -10,16 +10,20 @@ export default class MateService {
       this.apiUrl = `${this.domain}mate/analyze`;
     }
   
-    async getReview(parsedCode = '') {  
+    async getReview(payload: RequestType): Promise<ReviewType> {  
+      for (const [key, value] of Object.entries(payload)) {
+        if (!value) {
+          console.error({ ok: false, result: { message: `Missed value: ${key}` } });
+          return;
+        }
+      }
+
       try {
         const response: Response = await fetch(this.apiUrl, {
           method: "POST",
-          body: JSON.stringify({ content: parsedCode }),
+          body: JSON.stringify(payload),
           headers: { "Content-Type": "application/json" }
         });
-        // if (!response.ok) {
-        //   throw new Error(`Request failed with status: ${response.status}`);
-        // }
         
         const responseData = await response.json();
 
@@ -32,7 +36,7 @@ export default class MateService {
       }
     }
 
-    _getExtractedResult(responseData) {
+    _getExtractedResult(responseData): ResultViewProps {
       return responseData.choices[0].message.content
     }
 
