@@ -1,8 +1,9 @@
 import type { PlasmoMessaging } from "@plasmohq/messaging";
+import type { RequestType, ReviewType } from "~types/types";
+
 import { Storage } from "@plasmohq/storage";
 import MateService from "src/mate-service";
 import md5 from "blueimp-md5";
-import type { RequestType, ReviewType } from "~types/types";
 
 const storage = new Storage();
 const service = new MateService();
@@ -17,26 +18,14 @@ if (process.env.NODE_ENV === 'development') {
     },
   });
 }
- 
-const getCachedReview = async (previousReviews: ReviewType[], id: string) => {
-  const cachedReview = previousReviews.find((r: ReviewType) => r.id === id);
-  console.log('Cached currentReview:', cachedReview);
-  return cachedReview;
-}
 
-const generateReview = async (payload: RequestType, hash: string): Promise<ReviewType> => {
-  console.log(`Current review is not found, requesting...`);
-  let { ok, result, error } = await service.getReview(payload);
-  if (typeof result === 'string') {
-    result = JSON.parse(result)
-  }
+const generateReview = async (payload: RequestType): Promise<ReviewType> => {
+  let response: ReviewType = await service.getReview(payload);
+  // if (typeof result === 'string') {
+  //   result = JSON.parse(result);
+  // }
 
-  return {
-    id: hash,
-    reqStatus: ok,
-    result,
-    error
-  }
+  return response
 }
 
 const handler: PlasmoMessaging.MessageHandler = async (req, _res) => {
@@ -48,18 +37,17 @@ const handler: PlasmoMessaging.MessageHandler = async (req, _res) => {
     return;
   }
 
-  const sourceCode = req.body.content;
-  const hash = md5(sourceCode);
+  const { filename, parsedCode, user_id } = req.body;
+  const hash = md5(parsedCode);
 
-  const previousReviews: ReviewType[] = await storage.get('previousReviews') || [];
-  let currentReview = await getCachedReview(previousReviews, hash);
+  let currentReview = await generateReview({user_id, parsedCode, filename, id: hash})
 
-  if (!currentReview || !currentReview.reqStatus) {
+  if (!currentReview || !currentReview.ok) {
     if (!req.body.userId) {
       console.error('User not found in request');
       return;
     }
-    const result = await generateReview(req.body, hash);
+    const result = await generateReview(req.body);
     storage.set('currentReview', result);
   }
 }

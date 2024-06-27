@@ -1,4 +1,4 @@
-import type { RequestType ,ErrorType } from "~types/types";
+import type { RequestType ,ErrorType, ReviewType, ResultViewProps } from "~types/types";
 
 export default class MateService {
     private domain: string;
@@ -11,20 +11,22 @@ export default class MateService {
     }
   
     async getReview({
-      parsedCode,
+      id,
+      user_id,
       filename,
-      userId,
-    }: RequestType) {  
+      parsedCode,
+    }: RequestType): Promise<ReviewType> {  
       for (const [key, value] of Object.entries(arguments[0])) {
         if (!value) {
-          return { ok: false, result: { message: `Missed value: ${key}` } };
+          console.error({ ok: false, result: { message: `Missed value: ${key}` } });
+          return;
         }
       }
 
       try {
         const response: Response = await fetch(this.apiUrl, {
           method: "POST",
-          body: JSON.stringify({ content: parsedCode, filename, userId }),
+          body: JSON.stringify(arguments[0]),
           headers: { "Content-Type": "application/json" }
         });
         
@@ -39,7 +41,7 @@ export default class MateService {
       }
     }
 
-    _getExtractedResult(responseData): object {
+    _getExtractedResult(responseData): ResultViewProps {
       return responseData.choices[0].message.content
     }
 

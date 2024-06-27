@@ -9,29 +9,38 @@ import { ResultView } from "~components/resultView";
 import { ErrorView } from "~components/errorView";
 import { LoginView } from "~components/loginView";
 
-const getCurrentView = () => {
-  const [currentReview] = useStorage("currentReview");
-  const [user] = useStorage<User>("user");
-
-  if (!user && !user?.user_metadata?.preferred_username) {
-    return <LoginView />
-  }
-  if (!currentReview) {
-    return <LoadingAnimation />;
-  }
-  if (currentReview.error) {
-    return <ErrorView {...currentReview.error} />;
-  }
-
-  return <ResultView {...currentReview.result} />;
-};
+import { useEffect, useState } from "react";
 
 function IndexSidePanel() {
+  const [user, setUser] = useState<User | null>(null);
+  const [currentReview, setCurrentReview] = useState<any>(null);
+  const [view, setView] = useState<JSX.Element | null>(null);
+
+  const [storedUser] = useStorage<User>("user");
+  const [storedCurrentReview] = useStorage("currentReview");
+
+  useEffect(() => {
+    setUser(storedUser);
+    setCurrentReview(storedCurrentReview);
+  }, [storedUser, storedCurrentReview]);
+
+  useEffect(() => {
+    if (!user && !user?.user_metadata?.preferred_username) {
+      setView(<LoginView />);
+    } else if (!currentReview) {
+      setView(<LoadingAnimation />);
+    } else if (currentReview.error) {
+      setView(<ErrorView {...currentReview.error} />);
+    } else {
+      setView(<ResultView {...currentReview.result} />);
+    }
+  }, [user, currentReview]);
+
   return (
     <div className="tw-h-full tw-flex tw-flex-col tw-justify-between">
       <Header />
       <div className="tw-mx-auto tw-text-font">
-        { getCurrentView() }
+        {view}
       </div>
       <Footer />
     </div>

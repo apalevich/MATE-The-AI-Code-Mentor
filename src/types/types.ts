@@ -1,7 +1,8 @@
 type RequestType = {
+  id?: string,
+  user_id: string,
   filename: string,
   parsedCode: string,
-  userId: string | number,
 };
 
 type RecommendationObject = {
@@ -18,8 +19,8 @@ type ResultViewProps = {
 };
 
 type ReviewType = {
-  id: string,
-  reqStatus?: boolean
+  id?: string,
+  ok: boolean
   result?: ResultViewProps,
   error?: ErrorType
 } | undefined;
