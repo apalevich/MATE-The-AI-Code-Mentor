@@ -39,18 +39,24 @@ const getReview = async (input: string) => {
   });
 };
 
+const createErrorPayload = (message: string, url: string, text: string): ErrorType => ({
+  message,
+  button: {
+    url,
+    text
+  }
+});
+
 detectUrlChange.on('change', async () => {
   if (document.location.host !== 'github.com') {
-    const payload = {
-      message: "Please, visit GitHub.com to use MATE",
-      button: {
-        url: 'https://github.com/facebook/react/blob/main/scripts/rollup/utils.js',
-        text: 'Open example'
-      }  
-    };
+    const payload = createErrorPayload(
+      "Please, visit GitHub.com to use MATE",
+      'https://github.com/facebook/react/blob/main/scripts/rollup/utils.js',
+      'Open example'
+    );
     sendToBackground({
       name: 'review',
-      body: payload,
+      body: {ok: false, error: payload},
       extensionId: process.env.CRX_IR
     });
     return false;
@@ -61,17 +67,14 @@ detectUrlChange.on('change', async () => {
     const parsedText = document.getElementById("read-only-cursor-text-area")?.textContent;
 
     if (!parsedText) {
+      const payload = createErrorPayload(
+        "Code not detected. Please, open any file in a repository with code and try again",
+        'https://github.com/facebook/react/blob/main/scripts/rollup/utils.js',
+        'Open example'
+      );
       sendToBackground({
         name: "review",
-        body: {
-          error: {
-            message: "Code not found. Please, open any file in a repository with code and try again",
-            button: {
-              url: 'https://github.com/facebook/react/blob/main/scripts/rollup/utils.js',
-              text: 'Open example'
-            }
-          }
-        },
+        body: {ok: false, error: payload},
         extensionId: chrome.runtime.id
       });
       return false;
