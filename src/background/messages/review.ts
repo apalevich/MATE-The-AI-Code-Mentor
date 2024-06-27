@@ -24,10 +24,12 @@ const getCachedReview = async (previousReviews: ReviewType[], id: string) => {
   return cachedReview;
 }
 
-const generateReview = async (payload: RequestType, hash: string) => {
+const generateReview = async (payload: RequestType, hash: string): Promise<ReviewType> => {
   console.log(`Current review is not found, requesting...`);
-  const generatedReview = await service.getReview(payload);
-  const { ok, result, error } = generatedReview;
+  let { ok, result, error } = await service.getReview(payload);
+  if (typeof result === 'string') {
+    result = JSON.parse(result)
+  }
 
   return {
     id: hash,
@@ -53,10 +55,11 @@ const handler: PlasmoMessaging.MessageHandler = async (req, _res) => {
   let currentReview = await getCachedReview(previousReviews, hash);
 
   if (!currentReview || !currentReview.reqStatus) {
-    const user = await storage.get('user');
-    const userId = user.id;
-    const payload = {...req.body, userId };
-    const result = await generateReview(payload, hash);
+    if (!req.body.userId) {
+      console.error('User not found in request');
+      return;
+    }
+    const result = await generateReview(req.body, hash);
     storage.set('currentReview', result);
   }
 }

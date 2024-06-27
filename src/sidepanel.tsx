@@ -12,6 +12,7 @@ import { LoginView } from "~components/loginView";
 const getCurrentView = () => {
   const [currentReview] = useStorage("currentReview");
   const [user] = useStorage<User>("user");
+
   if (!user && !user?.user_metadata?.preferred_username) {
     return <LoginView />
   }
@@ -22,8 +23,7 @@ const getCurrentView = () => {
     return <ErrorView {...currentReview.error} />;
   }
 
-  const serializedResult = JSON.parse(currentReview.result);
-  return <ResultView {...serializedResult} />;
+  return <ResultView {...currentReview.result} />;
 };
 
 function IndexSidePanel() {

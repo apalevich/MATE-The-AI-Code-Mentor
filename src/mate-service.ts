@@ -15,7 +15,6 @@ export default class MateService {
       filename,
       userId,
     }: RequestType) {  
-      // Check arguments
       for (const [key, value] of Object.entries(arguments[0])) {
         if (!value) {
           return { ok: false, result: { message: `Missed value: ${key}` } };

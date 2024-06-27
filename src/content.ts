@@ -2,13 +2,21 @@ import type { PlasmoCSConfig } from "plasmo";
 
 import { sendToBackground } from "@plasmohq/messaging";
 import detectUrlChange from 'detect-url-change';
+import { Storage } from "@plasmohq/storage";
 
 export const config: PlasmoCSConfig = {
   matches: ["https://*.github.com/*"],
   all_frames: true,
 };
 
-detectUrlChange.on('change', () => {
+const storage = new Storage()
+
+const getUser = async() => {
+  const user = await storage.get('user');
+  return user;
+}
+
+detectUrlChange.on('change', async () => {
   createButton();
 
   if (document.location.host !== 'github.com') {
@@ -36,14 +44,28 @@ detectUrlChange.on('change', () => {
       return false;
     }
     
-    sendToBackground({
-      name: "review",
-      body: {
-        filename: location.pathname.split('/').pop() || '',
-        parsedCode: parsedText,
-      },
-      extensionId: chrome.runtime.id
-    });
+    getUser()
+    .then(user => {
+      if (user?.id) {  
+        sendToBackground({
+          name: "review",
+          body: {
+            filename: location.pathname.split('/').pop() || '',
+            parsedCode: parsedText,
+            userId: user.id
+          },
+          extensionId: chrome.runtime.id
+        });
+      } else {
+        sendToBackground({
+          name: "review",
+          body: {
+            error: {message: "User not found"}
+          },
+          extensionId: chrome.runtime.id
+        });
+      }
+    })
   }, 1000);
   return false
 })
