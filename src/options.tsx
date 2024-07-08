@@ -54,7 +54,7 @@ function IndexOptions() {
     <>
       <h2 className="tw-pl-0 tw-pb-1 tw-border-b-2 tw-border-blue-600 tw-text-2xl tw-uppercase tw-inline-block tw-font-thin">Hello, {user?.user_metadata?.preferred_username}!</h2>
       <div className="tw-my-8 tw-flex tw-gap-4"> 
-        <h3 className="tw-text-xl">You can now close this page and use MATE on the <a href="https://github.com">GitHub</a></h3>
+        {/* <h3 className="tw-text-xl">You can now close this page and use MATE on the <a href="https://github.com">GitHub</a></h3> */}
       </div>
       <button
         className="tw-bg-blue-600 tw-text-white tw-w-full tw-py-2 tw-px-5 tw-block tw-h-10 tw-rounded-full tw-mt-8 tw-transition-all tw-duration-500 tw-ease-in-out tw-border-none tw-uppercase hover:tw-bg-blue-700 hover:tw-shadow-lg hover:tw-cursor-pointer focus:tw-outline-none"
