@@ -1,14 +1,16 @@
 import type { PlasmoCSConfig } from "plasmo";
 import type { ErrorType, RequestType } from "~types/types";
 import type { User } from "@supabase/supabase-js";
-import type { PlasmoMessaging } from "@plasmohq/messaging";
 
 import { sendToBackground } from "@plasmohq/messaging";
 import detectUrlChange from 'detect-url-change';
 import { Storage } from "@plasmohq/storage";
 
 export const config: PlasmoCSConfig = {
-  matches: ["https://*.github.com/*"],
+  matches: [
+    "https://github.com/*",
+    "https://*.github.com/*"
+  ],
   all_frames: true,
 };
 
