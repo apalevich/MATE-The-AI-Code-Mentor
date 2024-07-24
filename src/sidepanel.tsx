@@ -13,7 +13,6 @@ import { LoginView } from "~components/loginView";
 const getCurrentView = () => {
   const [currentReview] = useStorage<ReviewType>("currentReview");
   const [user] = useStorage<User>("user");
-  console.log('update:', user, currentReview)
 
   if (!user && !user?.user_metadata?.preferred_username) {
     return <LoginView />

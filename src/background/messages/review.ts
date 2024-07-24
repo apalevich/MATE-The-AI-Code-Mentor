@@ -34,7 +34,6 @@ const handler: PlasmoMessaging.MessageHandler = async (req, _res) => {
   const { filename, parsedCode, user_id } = req.body;
   
   if (currentReview?.id == md5(parsedCode)) {
-    console.log('result is the same');
     await storage.set('currentReview', currentReview);
     return;
   }
@@ -55,7 +54,6 @@ const handler: PlasmoMessaging.MessageHandler = async (req, _res) => {
   const hash = md5(parsedCode);
   const newReview = await generateReview({user_id, parsedCode, filename, id: hash});
 
-  console.log('result', newReview);
   await storage.set('currentReview', newReview);
   return;
 }
