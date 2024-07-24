@@ -34,7 +34,7 @@ export const ResultView = ({
               <PieChart value={overallScore} />
               <div className="tw-flex tw-flex-col">
                 <p className="tw-text-xl">{overallScore}%</p>
-                <h2 className="tw-text-5xl tw-font-bold tw-text-grey-900 tw-dark:text-white tw-basis-2">
+                <h2 className="tw-text-4xl tw-font-bold tw-text-grey-900 tw-dark:text-white tw-basis-2">
                   {shortestFeedback}
                 </h2>
               </div>
