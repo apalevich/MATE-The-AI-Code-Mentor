@@ -14,11 +14,10 @@ function IndexOptions() {
   const initializeSession = async () => {
     const { data, error } = await supabase.auth.getSession()
     if (error) {
-      console.error(error)
+      console.error('initializeSession:', error)
       return
     }
     if (data.session) {
-      console.log('Supabase data: ', data);
       setUser(data.session.user)
     }
   }
