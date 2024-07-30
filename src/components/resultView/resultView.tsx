@@ -1,5 +1,6 @@
 import PieChart from "~components/piechart";
 import type { ResultViewProps } from "~types/types";
+import { useState } from "react";
 
 const renderRecommendations = (recommendations, fillColor) => {
     return recommendations?.length ? recommendations.map((recommendation, index) => (
@@ -26,6 +27,26 @@ export const ResultView = ({
     mustHaveRecommendations,
     niceToHaveRecommendations
 }: ResultViewProps) => {
+    const [likeValue, setLikeValue] = useState(null);
+    const [notesValue, setNotesValue] = useState("");
+
+
+    const handleLikeChange = (event) => {
+      setLikeValue(event.target.value === 'like');
+      console.log(`Like selected: ${event.target.value}`);
+    };
+
+    const handleNotesChange = (event) => {
+      setNotesValue(event.target.value);
+    }
+
+    const logState = () => {
+      console.dir({
+        Notes: notesValue,
+        Like: likeValue
+      })
+    }
+
     return (
       <div className="tw-py-6">
         <div className="tw-m-auto tw-px-6 tw-text-grey-600">
@@ -48,6 +69,39 @@ export const ResultView = ({
                 {renderRecommendations(mustHaveRecommendations, "red")}
                 {renderRecommendations(niceToHaveRecommendations, "orange")}
               </div>
+            </div>
+            <div>
+              <div className="tw-flex tw-justify-between tw-items-center tw-mt-8">
+                <label className="tw-flex tw-items-center">
+                  <input 
+                    type="radio" 
+                    name="feedback" 
+                    value="like" 
+                    className="tw-mr-2" 
+                    onChange={handleLikeChange} 
+                  />
+                  <span className="tw-text-green-500">Like</span>
+                </label>
+                <label className="tw-flex tw-items-center">
+                  <input 
+                    type="radio" 
+                    name="feedback" 
+                    value="dislike" 
+                    className="tw-mr-2" 
+                    onChange={handleLikeChange} 
+                  />
+                  <span className="tw-text-red-500">Dislike</span>
+                </label>
+              </div>
+              <div className="tw-mt-4">
+                <textarea
+                  className="tw-w-full tw-p-2 tw-border tw-border-grey-300 tw-rounded"
+                  rows={4}
+                  placeholder="Provide your feedback here..."
+                  onChange={handleNotesChange}
+                ></textarea>
+              </div>
+              <p onClick={logState}>log</p>
             </div>
           </div>
         </div>
