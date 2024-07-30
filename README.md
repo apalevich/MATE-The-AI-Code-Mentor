@@ -24,11 +24,6 @@ Suggestions are welcome at [hello@apalevich.com](mailto:hello@apalevich.com)
 
 # Coming updates
 
-**1.0 Auth for users**
-- [ ] Integrate OAuth solution
-- [ ] Develop login page
-- [ ] Route auth/unauth user
-
 **1.x AccountManagement integration**
 - [ ] Plans
 - [ ] Options page
@@ -38,6 +33,11 @@ Suggestions are welcome at [hello@apalevich.com](mailto:hello@apalevich.com)
 - [ ] Add task descriptions for context
 
 ## Past Releases
+
+**1.0 Auth for users**
+- [x] Integrate OAuth solution
+- [x] Develop login page
+- [x] Route auth/unauth user
 
 **0.9 "The hacker" release**
 - [x] Implement breakable API handler
