@@ -24,6 +24,10 @@ Suggestions are welcome at [hello@apalevich.com](mailto:hello@apalevich.com)
 
 # Coming updates
 
+**1.1 Implement Metrics**
+- [ ] Add feedback form
+- [ ] Implement analytics
+
 **1.x AccountManagement integration**
 - [ ] Plans
 - [ ] Options page
